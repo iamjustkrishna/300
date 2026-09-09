@@ -87,3 +87,19 @@ This folder contains the completely redesigned, museum-grade, classical stoic lu
 * **Design System Asset**: `assets/13394188174485581719` ("300 Classical Stoic Luxury")
 * **Stitch AI Engine**: `GEMINI_3_8_FLASH`
 
+---
+
+## v3 Screen Suite (UI_Screen/v3/)
+
+A refined **v3 Suite** has been generated and saved directly in [`UI_Screen/v3/`](v3/README.md), infusing the battle-tested, chiseled Spartan armor, hoplite shield meander patterns, thrusting spear perspectives, and drifting hot embers from `inspiration/` into the minimalist luxury layout of `UI_Screen/`:
+
+* [`01_Splash_Brand_Genesis_v3.png`](v3/01_Splash_Brand_Genesis_v3.png) (`623cddd3b8b444c29f89b19a8b2a06c9`)
+* [`02_Onboarding_The_Reveal_v3.png`](v3/02_Onboarding_The_Reveal_v3.png) (`c643e2536a954f69b54d8c0efef4f43d`)
+* [`03_Home_Curated_Themes_v3.png`](v3/03_Home_Curated_Themes_v3.png) (`5351f669ad144001bb0b2f60c7fafac3`)
+* [`04_Theme_Live_Preview_Apply_v3.png`](v3/04_Theme_Live_Preview_Apply_v3.png) (`ccf6e928e4a74fa28467e085afa6c235`)
+* [`05_Studio_Widgets_Wallpapers_v3.png`](v3/05_Studio_Widgets_Wallpapers_v3.png) (`33e8f355b90e40cf98334a8eb5df9d53`)
+* [`06_Settings_Vanguard_Pass_v3.png`](v3/06_Settings_Vanguard_Pass_v3.png) (`17d924506c62425e8b01abd524643053`)
+
+See [`UI_Screen/v3/README.md`](v3/README.md) for full visual specifications and Stitch cloud preview links.
+
+

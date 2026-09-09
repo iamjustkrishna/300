@@ -28,12 +28,19 @@
   4. `04_Theme_Live_Preview_Apply.png` (`1fedc67d269a457db11fc5db2bea3d2a`)
   5. `05_Studio_Widgets_Wallpapers.png` (`6251170fce5d4c118e011786d7682447`)
   6. `06_Settings_Vanguard_Pass.png` (`5af911867fad49bbb5d9206a67da386d`)
+- [x] Generated the **v3 UI Suite** in `UI_Screen/v3/` using Stitch `GEMINI_3_8_FLASH`, fusing `UI_Screen/` minimal luxury with `inspiration/` authentic battle-forged Spartan iconography (Corinthian helmet, hoplite shield meander bevels, thrusting spear, drifting embers):
+  1. `01_Splash_Brand_Genesis_v3.png` (`623cddd3b8b444c29f89b19a8b2a06c9`)
+  2. `02_Onboarding_The_Reveal_v3.png` (`c643e2536a954f69b54d8c0efef4f43d`)
+  3. `03_Home_Curated_Themes_v3.png` (`5351f669ad144001bb0b2f60c7fafac3`)
+  4. `04_Theme_Live_Preview_Apply_v3.png` (`ccf6e928e4a74fa28467e085afa6c235`)
+  5. `05_Studio_Widgets_Wallpapers_v3.png` (`33e8f355b90e40cf98334a8eb5df9d53`)
+  6. `06_Settings_Vanguard_Pass_v3.png` (`17d924506c62425e8b01abd524643053`)
 - [x] Preserved user's ground-truth `*_v2.png` reference files in `UI_Screen/`.
-- [x] Updated all project specs (`specs/screen-spec.md`, `specs/design-system.md`, `states/design.md`, `states/current.md`, `UI_Screen/README.md`).
+- [x] Updated all project specs (`specs/screen-spec.md`, `specs/design-system.md`, `states/design.md`, `states/current.md`, `UI_Screen/README.md`, `UI_Screen/v3/README.md`).
 - [x] Respected hard boundary: **Zero production Kotlin or Android architecture code was written in Phase 1.**
 
 ### What is Being Worked On?
-- Final user review and sign-off on the Classical Stoic Luxury UI screens.
+- Final user review and sign-off on the Classical Stoic Luxury UI screens (v2 & v3 suites).
 
 ### What is Blocked?
 - **NO BLOCKERS**. All 6 screens are fully generated, downloaded, and verified.
