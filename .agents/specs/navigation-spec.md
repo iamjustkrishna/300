@@ -1,96 +1,75 @@
-# Navigation & Information Architecture Specification
+# 300 — Navigation & User Flow Specification
+
+> **Document Version**: 2.0.0 (Phase 1 Approved Baseline)  
+> **Status**: APPROVED  
+> **Framework**: Jetpack Navigation Compose (Phase 2 Target)
 
 ---
 
-## 1. Information Architecture (IA) Hierarchy
+## 1. Top-Level Information Architecture (IA)
 
 ```
 [ App Launch ]
-       │
-       ▼ (Check DataStore: isOnboardingCompleted)
-       ├── FALSE ──► [ Onboarding Graph ]
-       │                   ├── Step 1: Oath / Identity Selection
-       │                   ├── Step 2: Armory / Day 1 Wallpaper Preview & Apply
-       │                   └── Step 3: First Challenge Commitment ──► [ Main Graph ]
-       │
-       └── TRUE ───► [ Main Graph (Bottom Navigation / NavRail) ]
-                           │
-                           ├── Tab 1: HOME (SCREEN-HOME-001)
-                           │     ├── Daily Challenge Card ──► [ Challenge Detail Sheet ]
-                           │     ├── Active Streak Banner ──► [ Streak Milestones ]
-                           │     ├── Today's Featured Wallpaper ──► [ Wallpaper Preview ]
-                           │     └── Quick Widget Pin Action ──► [ Widget Setup Dialog ]
-                           │
-                           ├── Tab 2: ARMORY / WALLPAPERS (SCREEN-WALLPAPER-001)
-                           │     ├── Wallpaper Grid (Filter by: All, Shields, Ruin, Bronze, Steel)
-                           │     └── Wallpaper Item Tap ──► [ Fullscreen Preview (SCREEN-WALLPAPER-002) ]
-                           │                                   ├── Toggle App Grid / Clock Mock
-                           │                                   ├── 1-Tap Apply (Home, Lock, Both)
-                           │                                   └── Locked Item ──► [ Paywall Sheet ]
-                           │
-                           ├── Tab 3: DISCIPLINE (SCREEN-CHALLENGE-001)
-                           │     ├── Today's Challenge (Active / Completed)
-                           │     ├── 300 Day Streak Progress Bar & Milestones
-                           │     └── Past Completed Days History Log
-                           │
-                           └── Tab 4: SETTINGS (SCREEN-SETTINGS-001)
-                                 ├── Notification Schedule (Time Picker)
-                                 ├── Widget Configuration
-                                 ├── Data & Storage (Clear Cache)
-                                 ├── Restore Purchases
-                                 ├── Privacy Policy & Legal
-                                 └── About 300
+      │
+      ▼
+[ SCR-001: Splash Screen ]
+      │
+      ├────────────────────────────┐
+      ▼ (First Launch)             ▼ (Returning User)
+[ SCR-002: Onboarding ]            │
+      │                            │
+      └────────────┬───────────────┘
+                   ▼
+     ┌─────────────────────────────┐
+     │   Main Bottom Navigation    │
+     │      (5 Root Destinations)  │
+     └─────────────┬───────────────┘
+                   │
+    ┌──────────────┼──────────────┬──────────────┬──────────────┐
+    ▼              ▼              ▼              ▼              ▼
+[ Tab 1 ]      [ Tab 2 ]      [ Tab 3 ]      [ Tab 4 ]      [ Tab 5 ]
+Themes         Wallpapers     Widgets        Icons          Settings
+(SCR-003)      (SCR-005)      (SCR-007)      (SCR-009)      (SCR-011)
+    │              │              │              │              │
+    ▼              ▼              │              │              │
+SCR-004        SCR-006            │              │              │
+Theme Detail   Wallpaper Preview  │              │              │
+    │              │              │              │              │
+    ▼              ▼              │              │              │
+SCR-010        System Apply       │              │              │
+Apply Modal    Dialog             │              │              │
+    │                             │              │              │
+    └─────────────────────────────┴──────────────┴──────────────┤
+                                                                ▼
+                                                            SCR-008
+                                                            Vanguard Paywall
 ```
 
 ---
 
-## 2. Jetpack Compose Navigation Graph Contracts
+## 2. Navigation Routes & Deep Link Matrix
 
-### Type-Safe Routes & Destinations
-
-```kotlin
-sealed interface ScreenRoute {
-    @Serializable
-    data object Onboarding : ScreenRoute
-
-    @Serializable
-    data object Home : ScreenRoute
-
-    @Serializable
-    data object Armory : ScreenRoute
-
-    @Serializable
-    data class WallpaperPreview(val wallpaperId: String) : ScreenRoute
-
-    @Serializable
-    data object Discipline : ScreenRoute
-
-    @Serializable
-    data class ChallengeDetail(val dayNumber: Int) : ScreenRoute
-
-    @Serializable
-    data object Settings : ScreenRoute
-
-    @Serializable
-    data class Paywall(val sourceTrigger: String) : ScreenRoute
-}
-```
+| Route URI | Canonical Screen | Description | Deep Link Pattern |
+| :--- | :--- | :--- | :--- |
+| `threehundred://splash` | `SCR-001` | Splash brand entry | `android.intent.action.MAIN` |
+| `threehundred://onboarding` | `SCR-002` | First-time transformation reveal | `threehundred://welcome` |
+| `threehundred://home` | `SCR-003` | The Phalanx Home Dashboard | `threehundred://themes` |
+| `threehundred://theme/{themeId}` | `SCR-004` | Theme Detail & Live Preview | `threehundred://theme/{themeId}` |
+| `threehundred://wallpapers` | `SCR-005` | Wallpaper Vault Gallery | `threehundred://wallpapers` |
+| `threehundred://wallpaper/{wallpaperId}` | `SCR-006` | Fullscreen Wallpaper Preview | `threehundred://wallpaper/{wallpaperId}` |
+| `threehundred://widgets` | `SCR-007` | Spartan Widgets Forge | `threehundred://widgets` |
+| `threehundred://vanguard` | `SCR-008` | Vanguard Pass Paywall | `threehundred://upgrade` |
+| `threehundred://icons` | `SCR-009` | Icon Pack Forge & Styler | `threehundred://icons` |
+| `threehundred://settings` | `SCR-011` | Settings & Vault Management | `threehundred://settings` |
 
 ---
 
-## 3. Deep Link & AppWidget Navigation Actions
+## 3. Back Stack & State Preservation Rules
 
-| Source | Trigger / Intent | Destination Route | Behavior |
-|---|---|---|---|
-| Glance Quote Widget | Tap Widget Body | `ScreenRoute.Home` | Opens app, highlights today's quote |
-| Glance Streak Widget | Tap "Conquer" Button | `ScreenRoute.Discipline` | Opens app directly to Daily Challenge completion view |
-| Daily Notification | Notification Click | `ScreenRoute.Discipline` | Opens Day's active challenge sheet directly |
-| Deep Link / External | `300://wallpaper/{id}` | `ScreenRoute.WallpaperPreview(id)` | Resolves asset and opens full-screen preview |
-
----
-
-## 4. Back Stack & Exit Lifecycle Rules
-1. **Onboarding Back Stack**: Once Onboarding Step 3 is completed and Home is launched, the Onboarding Graph is popped with `popUpTo(0) { inclusive = true }`. Pressing system back on Home exits the app to the device launcher.
-2. **Bottom Navigation Switching**: Switching between Home, Armory, Discipline, and Settings saves and restores back-stack state (`restoreState = true`, `launchSingleTop = true`).
-3. **Modal Sheets**: Bottom sheets and Paywall overlays dismiss gracefully with standard Android back gesture without exiting the host screen.
-4. **Predictive Back Navigation**: Fully compatible with Android 14+ predictive back gestures with smooth scrim fading and edge transitions.
+1. **Root Tabs (Bottom Navigation)**:
+   - Tapping any of the 5 bottom tabs pops to the root destination of that tab with `saveState = true` and `restoreState = true`.
+   - Pressing system Back on any secondary tab (Wallpapers, Widgets, Icons, Settings) routes to **The Phalanx (Home Dashboard)** before exiting the application.
+2. **Detail Screens (`SCR-004`, `SCR-006`)**:
+   - Pushed onto the current tab's back stack. System Back pops back to the originating gallery screen without re-triggering network or database reload.
+3. **Paywall (`SCR-008`) & Modals (`SCR-010`)**:
+   - Displayed as slide-up overlay sheets. Pressing Back or tapping the close button dismisses the sheet and restores the underlying screen state with zero loss of scroll position.

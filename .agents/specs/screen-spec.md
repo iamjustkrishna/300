@@ -1,325 +1,203 @@
-# Complete Screen Inventory & Specification
+# 300 — Screen Specification Inventory (Phase 1 Validated)
 
-This document is the canonical specification for every screen in **300**. No screen may be implemented without strictly complying with its specification here.
-
----
-
-## SCREEN-ONBOARD-001: The Spartan Oath (Identity)
-
-### Metadata
-- **Screen ID**: `SCREEN-ONBOARD-001`
-- **Name**: Spartan Oath & Identity Selection
-- **Purpose**: Welcomes the user with a solemn, brutalist Spartan visual statement and establishes their personal focus.
-- **User Goal**: Choose their discipline path and commit to transforming their phone.
-- **Navigation Source**: Cold launch when `isOnboardingCompleted == false`.
-- **Navigation Destinations**: Forward to `SCREEN-ONBOARD-002`. System back exits app.
-
-### Visual Hierarchy & Components
-1. **Background**: Obsidian dark canvas (`#0B0B0C`) with subtle dark crimson vignette at screen edges.
-2. **Spartan Crest Icon**: Stylized bronze warrior helmet emblem at top center (72dp x 72dp).
-3. **Headline**: DisplayLarge Cinzel text: *"WHO COMMANDS THIS DEVICE?"* in Ash White (`#E5E5E7`).
-4. **Subhead**: BodyMedium: *"A weapon or a distraction? Choose your path of iron."* in Muted Gray (`#8F9094`).
-5. **Path Selection Cards** (Radio style cards with 1dp bronze border):
-   - **Path 1: Iron Body**: Physical grit, daily strength, cold exposure.
-   - **Path 2: Cold Mind**: Deep focus, zero mindless scrolling, mental discipline.
-   - **Path 3: Sovereign Will**: Complete mastery of time, habits, and stoic resolve.
-6. **Primary Action Button**: Full-width `SpartanButton` (Height 56dp): *"TAKE THE OATH"*, bronze background, black bold text.
-
-### States
-- **First Launch**: Default state; first card selected by default.
-- **Normal**: Smooth selection change; selected card glows with razor-thin 1.5dp Spartan bronze border.
-- **Loading**: Instant render (no network dependencies; pre-bundled resources).
-- **Offline**: Fully functional.
-- **Content Unavailable**: N/A (static embedded config).
-- **Returning User**: Skipped directly to Home.
-- **Premium User / Free User**: Identical in onboarding.
-
-### Responsive Behavior
-- **Compact Phone (360dp)**: Spacing compressed to 12dp between cards; subhead reduced to 14sp; scrollable if vertical height < 600dp.
-- **Standard Phone (412dp)**: Default layout.
-- **Foldable (Unfolded) & Tablet (600dp+)**: Content width constrained to 520dp centered with generous obsidian margins.
-
-### Accessibility & Analytics
-- **Touch Targets**: Cards have 72dp minimum height; Button is 56dp height.
-- **TalkBack**: Cards announce: *"Path: Iron Body. Focus on physical grit. Selected/Not Selected. Double tap to select."*
-- **Contrast**: Text `#E5E5E7` on `#0B0B0C` yields 17:1 contrast (WCAG AAA).
-- **Analytics Event**: `onboarding_oath_viewed`, `onboarding_oath_committed(path_id)`.
-- **Tests**: `OnboardingOathScreenTest` verifies path selection, DataStore state update, and navigation trigger.
+> **Document Version**: 2.0.0 (Phase 1 Validated Baseline)  
+> **Status**: APPROVED  
+> **Stitch Project ID**: `14386677080154071069`  
+> **Stitch Design System**: `assets/3071428720144166618`
 
 ---
 
-## SCREEN-ONBOARD-002: Day 1 Armory (Personalization)
+## Screen Inventory Overview
 
-### Metadata
-- **Screen ID**: `SCREEN-ONBOARD-002`
-- **Name**: Day 1 Wallpaper Preview & Armor Claim
-- **Purpose**: Delivers the immediate visual transformation payoff: previewing and setting the Day 1 Spartan wallpaper.
-- **User Goal**: Transform their phone's lock and home screen with 1 tap.
-- **Navigation Source**: `SCREEN-ONBOARD-001`.
-- **Navigation Destinations**: Forward to `SCREEN-ONBOARD-003`; Back to `SCREEN-ONBOARD-001`.
-
-### Visual Hierarchy & Components
-1. **Interactive Device Frame**: Centered 9:16 phone mockup displaying "The Vanguard" dark bronze Spartan wallpaper with mock lockscreen clock (12:00 / Today's Date).
-2. **Transformation Copy**: TitleMedium: *"CLAIM YOUR SHIELD"*, BodySmall: *"Set this wallpaper as your daily reminder of strength."*
-3. **Primary Action**: `SpartanButton`: *"SET WALLPAPER (HOME & LOCK)"*.
-4. **Secondary Action**: TextButton: *"Skip for now"*.
-
-### States
-- **Normal**: High-resolution preview rendered seamlessly from preloaded assets.
-- **Loading**: Subtle bronze shimmer while bitmap prepares in memory (<100ms).
-- **Offline**: Fully functional offline.
-- **Error**: If `WallpaperManager` throws permission/IO error, non-blocking toast displays: *"Unable to apply automatically. You can save to gallery in Armory."*
-
-### Responsive Behavior
-- **Phones**: Device frame takes 55% of vertical viewport height.
-- **Foldables / Tablets**: Device frame rendered in dual-pane layout: Left pane displays 3D-angled phone mockup; Right pane displays claim controls.
-
-### Accessibility & Analytics
-- **TalkBack**: Mockup described as: *"Preview of Spartan Vanguard dark wallpaper with Roman numerals."*
-- **Analytics Event**: `onboarding_wallpaper_applied`, `onboarding_wallpaper_skipped`.
-- **Tests**: `OnboardingArmoryScreenTest` verifies wallpaper application call and navigation.
+| Screen ID | Canonical Name | Category | Stitch Screen Reference |
+| :--- | :--- | :--- | :--- |
+| `SCR-001` | Splash & Brand Genesis | Entry | Brand Moment / Genesis Sigil |
+| `SCR-002` | Onboarding (The Spartan Reveal) | Entry | `90ff7f5167744050b5960af1588a502c` |
+| `SCR-003` | Home Dashboard (The Phalanx) | Discovery | `0e8957b32c06495696a5d5070d311626` |
+| `SCR-004` | Theme Detail & Live Preview | Themes | `e8e8a396fb2947dea513bb14ab1ef6f7` |
+| `SCR-005` | Wallpaper Vault (Discovery) | Wallpapers | `b028d16ebe5949ef8b39b5acc7733bf8` |
+| `SCR-006` | Wallpaper Fullscreen Preview & Apply | Wallpapers | `906d16f32dc647be8152f722e54e1cf9` |
+| `SCR-007` | Spartan Widgets Forge | Widgets | `85e33e992ae74f71a5a01a2b666221bd` |
+| `SCR-008` | Vanguard Pass Paywall | Monetization | `99f69724905342868e7dcc150caac233` |
+| `SCR-009` | Icon Pack Forge & Quick Styler | Customization | `4a7a0388e80644aba7ef0e60a9fea9bf` |
+| `SCR-010` | 1-Tap Apply Success Modal | Transition | `d9ec56f33bb943569648908cc2c3080a` |
+| `SCR-011` | Settings & Vault Management | System | `5378d88566804f85a95a34ab892a6114` |
 
 ---
 
-## SCREEN-ONBOARD-003: The First Challenge
+## Detailed Specifications per Screen
 
-### Metadata
-- **Screen ID**: `SCREEN-ONBOARD-003`
-- **Name**: First Spartan Challenge Commitment
-- **Purpose**: Introduces the daily discipline loop and establishes the Day 1 challenge.
-- **User Goal**: Accept Day 1 challenge and enter the active app.
-- **Navigation Source**: `SCREEN-ONBOARD-002`.
-- **Navigation Destinations**: Forward to `SCREEN-HOME-001` (pops onboarding stack).
-
-### Visual Hierarchy & Components
-1. **Day Header**: TitleSmall: *"DAY 1 OF 300"*, Spartan Crimson color (`#8A1C14`).
-2. **Challenge Title**: HeadlineMedium: *"THE FIRST HOUR"* in Ash White.
-3. **Challenge Rule Card**: Charcoal card (`#131416`) detailing the task: *"Spend your first 60 minutes today without social media or passive entertainment. Fuel your body with water, move with purpose, and prepare for battle."*
-4. **Primary Action Button**: `SpartanButton`: *"I ACCEPT THE CHALLENGE"* (triggers heavy haptic feedback, marks onboarding complete in DataStore, navigates to Home).
-
-### States
-- **Normal**: Card displayed with crisp typography.
-- **Offline**: Fully functional.
-- **Tests**: `OnboardingChallengeScreenTest` verifies onboarding completion flag set and navigation.
+### SCR-001: Splash & Brand Genesis
+* **ID**: `SCR-001`
+* **Name**: Splash & Brand Genesis
+* **Purpose**: Establish immediate high-craft immersion and initialize local Room/DataStore cache within 800ms.
+* **Target User**: All users on app launch.
+* **Entry Points**: App icon launch, OS cold start.
+* **Exit Points**: Routes to `SCR-002` (if first launch) or `SCR-003` (returning user).
+* **Primary Action**: Automatic transition after 800ms fade-in.
+* **Secondary Actions**: Tap anywhere to bypass animation.
+* **Components**: Centered bronze Tri-Blade Lambda ($\Lambda$) sigil with glowing amber rim, '300' chiseled wordmark, subtle ash particle effect on `#080809` OLED canvas.
+* **States**: Normal (0.8s), Loading (cache warmup), Error (fallback to home).
+* **Accessibility**: Screen reader announces "300: Spartan Theme".
+* **Analytics Events**: `app_cold_start`, `splash_dismissed`.
 
 ---
 
-## SCREEN-HOME-001: The War Room (Home Dashboard)
-
-### Metadata
-- **Screen ID**: `SCREEN-HOME-001`
-- **Name**: Home Dashboard
-- **Purpose**: Central hub showing current streak, active daily discipline challenge, featured daily wallpaper, and widget shortcut.
-- **User Goal**: Check off today's challenge, review streak progress, and glance at daily Spartan wisdom.
-- **Navigation Source**: App launch (when onboarding done) or Bottom Nav "Home" tab.
-- **Navigation Destinations**: Challenge Detail (`SCREEN-CHALLENGE-002`), Wallpaper Preview (`SCREEN-WALLPAPER-002`), Settings (`SCREEN-SETTINGS-001`).
-
-### Visual Hierarchy & Components
-1. **Top Bar**:
-   - App Brand: DisplaySmall *"300"* with bronze Spartan crest.
-   - Streak Pill (Top Right): Fire icon with number of consecutive days (`14 DAYS`) in Crimson/Bronze. Tap opens `SCREEN-CHALLENGE-001`.
-2. **Daily Maxim Card**:
-   - Quotes from Spartan generals and Stoic philosophers (e.g., *"He who sweats more in training bleeds less in war."*).
-3. **Hero Challenge Card**:
-   - Card containing Day number, challenge name, brief description, and large action button:
-     - State A (Pending): Bronze border, button text: *"I HAVE CONQUERED"* (Tap checks off challenge, triggers heavy metallic haptic thud).
-     - State B (Completed): Ash Gray/Crimson shield icon, text: *"CONQUERED FOR TODAY"*, checkmark badge.
-4. **Armory Glance Strip**:
-   - Horizontal carousel displaying "Today's Featured Armors" (wallpapers). Tapping opens preview.
-5. **Widget Setup Banner**:
-   - Dismissible prompt: *"Place the Spartan Shield on your home screen. Add Widget."*
-
-### States (8 Canonical States)
-1. **First Launch (Returning from Onboarding)**: Streak at 0 or 1, Day 1 challenge active, warm guidance banner.
-2. **Normal**: Active streak, today's challenge ready for completion, featured wallpapers loaded.
-3. **Loading**: Dark skeleton cards with bronze shimmer pulsation.
-4. **Offline**: Fully accessible; offline banner hidden or discreet; Room cached challenges and streak rendered.
-5. **Empty**: If challenge database has no active entry, fallback to evergreen Spartan challenge *"Master Your Mind"*.
-6. **Error**: Retry card with dignified prompt: *"The armory connection wavered. Tap to refresh."*
-7. **Returning User**: Highlight days disciplined; celebration animation if streak milestone reached.
-8. **Premium User vs. Free User**: Free user sees standard badges; Premium user sees "Vanguard Member" golden emblem in top bar.
-
-### Responsive Behavior
-- **Phones**: Single vertical scrolling column.
-- **Foldables & Tablets**: Dual-column dashboard: Left column contains Daily Maxim & Challenge Card; Right column contains Streak Stats & Armory carousel.
-
-### Accessibility & Analytics
-- **Touch Targets**: "I Have Conquered" button is 56dp height; streak pill is 48dp clickable area.
-- **TalkBack**: Full state announcements for completed challenges.
-- **Analytics Event**: `home_viewed`, `daily_challenge_completed(day_number, streak_count)`.
-- **Tests**: `HomeScreenTest` verifies challenge completion, streak counter increment, and offline stability.
+### SCR-002: Onboarding (The Spartan Reveal)
+* **ID**: `SCR-002`
+* **Name**: Onboarding (The Spartan Reveal)
+* **Purpose**: Visually demonstrate the transformation from generic stock Android to disciplined Spartan setup via an interactive before/after split slider.
+* **Target User**: First-time users seeking aesthetic upgrade.
+* **Entry Points**: `SCR-001` on first install.
+* **Exit Points**: `SCR-003` (Home Dashboard).
+* **Primary Action**: "START TRANSFORMATION" (solid bronze button).
+* **Secondary Actions**: Touch/drag interactive slider dividing Stock Android vs Spartan setup.
+* **Components**: Top Lambda crest, interactive split-screen phone mockup, 3 feature highlight cards (1-Tap Complete Themes, 4K True AMOLED, Native Glance Widgets), primary CTA button.
+* **States**: First-time, Slider dragging, Interactive haptic tap.
+* **Responsive Behavior**: Phone: Vertical split mockup; Tablet: Side-by-side device comparison.
+* **Stitch Reference**: `90ff7f5167744050b5960af1588a502c`.
+* **Analytics Events**: `onboarding_viewed`, `onboarding_slider_dragged`, `onboarding_completed`.
 
 ---
 
-## SCREEN-WALLPAPER-001: The Armory (Wallpaper Catalog)
-
-### Metadata
-- **Screen ID**: `SCREEN-WALLPAPER-001`
-- **Name**: Wallpaper Catalog Grid
-- **Purpose**: Browse curated Spartan wallpapers categorized by theme.
-- **User Goal**: Find and select a dark, brutalist wallpaper to personalize their phone.
-- **Navigation Source**: Bottom Nav "Armory" tab.
-- **Navigation Destinations**: Wallpaper Preview (`SCREEN-WALLPAPER-002`).
-
-### Visual Hierarchy & Components
-1. **Filter Chips**: Row of Spartan category chips: *"All"*, *"Shields & Crests"*, *"Ruins & Marble"*, *"Bronze & Iron"*, *"Battlefield"*.
-2. **Adaptive Wallpaper Grid**:
-   - 2 columns on phones (vertical aspect ratio 9:16 item cards).
-   - 3-4 columns on foldables and tablets.
-   - Cards display rounded 12dp corners, high-res WebP preview, subtle title, and lock badge for Vanguard tier.
-3. **Item Interaction**: Tap opens full-screen preview with smooth hero transition.
-
-### States
-- **Normal**: Fast thumbnail rendering via Coil with hardware bitmaps.
-- **Loading**: Grid of dark placeholder cards with subtle bronze shimmer.
-- **Offline**: Fully functional with all pre-bundled wallpapers.
-- **Free vs. Premium**: Locked wallpapers display a subtle bronze padlock icon in the top-right corner.
-
-### Responsive Behavior
-- Automatic column count adjustment based on `WindowWidthSizeClass`:
-  - Compact (<600dp): 2 columns.
-  - Medium (600dp - 840dp): 3 columns.
-  - Expanded (>840dp): 4 columns.
-
-### Accessibility & Analytics
-- **TalkBack**: Announce wallpaper title, category, and lock status: *"The Spartan Phalanx wallpaper, Bronze category, Free, Double tap to preview."*
-- **Analytics Event**: `wallpaper_catalog_viewed`, `wallpaper_thumbnail_clicked(wallpaper_id)`.
-- **Tests**: `WallpaperCatalogScreenTest` verifies category filtering and column counts.
+### SCR-003: Home Dashboard (The Phalanx)
+* **ID**: `SCR-003`
+* **Name**: Home Dashboard (The Phalanx)
+* **Purpose**: Central hub for daily theme drops, curated category browsing, and instant 1-tap setup previews.
+* **Target User**: Daily active users and aesthetic seekers.
+* **Entry Points**: `SCR-002` completion, bottom nav "Themes" tab, app resume.
+* **Exit Points**: `SCR-004` (Theme Detail), `SCR-005` (Wallpaper Vault), `SCR-007` (Widgets), `SCR-008` (Vanguard Pass).
+* **Primary Action**: "1-TAP APPLY" on Daily Featured Hero Card.
+* **Secondary Actions**: Filter by category chips (`ALL`, `AMOLED BLACK`, `BRONZE ARMOR`, `WARRIORS`), tap theme card in 2-column grid.
+* **Components**: Top bar with Lambda sigil and Vanguard badge, Daily Drop Hero Card with live timer and phone setup preview, horizontal scrolling category filter rail, 2-column theme grid, fixed 5-tab docked bottom nav.
+* **States**: First-time, Normal, Loading (shimmer), Empty, Offline (cached cards with offline indicator), Premium locked.
+* **Stitch Reference**: `0e8957b32c06495696a5d5070d311626`.
+* **Analytics Events**: `home_viewed`, `daily_drop_clicked`, `category_filtered`, `theme_card_clicked`.
 
 ---
 
-## SCREEN-WALLPAPER-002: Fullscreen Wallpaper Preview & Apply
-
-### Metadata
-- **Screen ID**: `SCREEN-WALLPAPER-002`
-- **Name**: Wallpaper Preview & Apply Engine
-- **Purpose**: Full-bleed immersive wallpaper inspection with mock phone UI overlays and 1-tap application.
-- **User Goal**: Preview how the wallpaper looks behind app icons and lockscreen clocks, then apply it.
-- **Navigation Source**: `SCREEN-WALLPAPER-001` or `SCREEN-HOME-001`.
-- **Navigation Destinations**: Paywall Sheet (`SCREEN-PAYWALL-001`) if locked; Back to Armory.
-
-### Visual Hierarchy & Components
-1. **Full-Bleed Wallpaper Canvas**: High-res image filling 100% of viewport with edge-to-edge rendering.
-2. **Overlay Control Bar (Top)**:
-   - Back button (circle 48dp, semi-transparent obsidian).
-   - Mock UI Toggle:
-     - Mode 1: Clean (no overlays).
-     - Mode 2: Lockscreen (shows real system time/date in clean serif font).
-     - Mode 3: Homescreen (shows semi-transparent grid of app icons).
-3. **Bottom Action Bar**:
-   - Semi-transparent obsidian gradient scrim.
-   - Title and category.
-   - Primary `SpartanButton`: *"APPLY WALLPAPER"* (opens bottom sheet with: *"Home Screen"*, *"Lock Screen"*, *"Both"*).
-   - If locked: Primary button is *"UNLOCK WITH VANGUARD PASS"*.
-
-### States
-- **Applying State**: Button shows subtle bronze progress spinner while `WallpaperManager` sets bitmap.
-- **Success State**: Haptic confirmation + toast: *"Shield Applied to Device"*.
-- **Error State**: Non-blocking alert: *"Failed to apply. Permission or memory constraint."*
-
-### Responsive Behavior
-- Wallpaper centers on focal point across all aspect ratios without stretching or distortion.
-- User can drag/pan slightly on wide or tall displays to adjust crop position.
-
-### Accessibility & Analytics
-- **Analytics Event**: `wallpaper_preview_viewed`, `wallpaper_applied(wallpaper_id, target_screen)`.
-- **Tests**: `WallpaperPreviewScreenTest` verifies overlay toggles and wallpaper application callbacks.
+### SCR-004: Theme Detail & Live Setup Preview
+* **ID**: `SCR-004`
+* **Name**: Theme Detail & Live Setup Preview
+* **Purpose**: Full interactive inspection of a complete theme (Wallpaper + Glance Widget + Icon Pack) on a simulated Android device before applying.
+* **Target User**: Users evaluating a specific theme.
+* **Entry Points**: Tapping any theme card from `SCR-003`.
+* **Exit Points**: Back to `SCR-003`, `SCR-010` (Apply Success Modal), `SCR-008` (if locked).
+* **Primary Action**: "APPLY COMPLETE THEME (1-TAP)" solid bronze CTA.
+* **Secondary Actions**: Toggle "HOME SCREEN" vs "LOCK SCREEN" tabs, "CUSTOMIZE COMPONENTS", toggle favorite heart, share theme.
+* **Components**: Back button, theme title and edition tag, segmented Home/Lock switcher, realistic smartphone preview mockup with wallpaper/widget/dock overlay, 4 technical spec chips (99.4% AMOLED, 4K UHD, Glance, -0.3% drain), Spartan Blueprint component cards, sticky bottom action bar.
+* **States**: Normal, Applying (disabled CTA with spinner), Applied successfully, Vanguard locked (CTA becomes "UNLOCK VANGUARD PASS").
+* **Stitch Reference**: `e8e8a396fb2947dea513bb14ab1ef6f7`.
+* **Analytics Events**: `theme_detail_viewed`, `preview_mode_toggled`, `apply_theme_clicked`.
 
 ---
 
-## SCREEN-CHALLENGE-001: The 300 Discipline Hub
-
-### Metadata
-- **Screen ID**: `SCREEN-CHALLENGE-001`
-- **Name**: Discipline & Streak Hub
-- **Purpose**: Tracks user's multi-day discipline journey toward the 300-day milestone.
-- **User Goal**: Review streak statistics, explore past achievements, and inspect upcoming challenges.
-- **Navigation Source**: Bottom Nav "Discipline" tab.
-- **Navigation Destinations**: Challenge Detail (`SCREEN-CHALLENGE-002`).
-
-### Visual Hierarchy & Components
-1. **The 300 Ring / Progress Arc**:
-   - Hero graphic showing current day out of 300 (e.g., `Day 14 / 300`).
-   - Circular bronze progress meter with crimson fire accent.
-2. **Milestone Shields**:
-   - Row of unlockable badges:
-     - Day 3: *The First Stand* (Bronze)
-     - Day 7: *The Phalanx* (Iron)
-     - Day 14: *The Shield-Wall* (Steel)
-     - Day 30: *Spartan Warrior* (Crimson)
-     - Day 100: *The Immortal* (Gold)
-     - Day 300: *The 300 Legend* (Obsidian & Gold)
-3. **Challenge Calendar / History Log**:
-   - Chronological list of completed days with date, challenge title, and completion timestamp.
-
-### States
-- **Normal**: Full history rendered from Room DB.
-- **Empty**: For Day 1 users, shows encouraging quote: *"A journey of 300 days begins with a single shield."*
-- **Offline**: Fully accessible.
-
-### Accessibility & Analytics
-- **TalkBack**: Arc announces: *"Current progress: 14 days out of 300 completed. 4 percent total journey."*
-- **Analytics Event**: `discipline_hub_viewed`, `milestone_badge_clicked(badge_id)`.
-- **Tests**: `DisciplineHubScreenTest` verifies streak calculation and badge unlock states.
+### SCR-005: Wallpaper Vault (Discovery & Grid)
+* **ID**: `SCR-005`
+* **Name**: Wallpaper Vault
+* **Purpose**: Browse, filter, and discover 300+ 4K True AMOLED and 3D Parallax canvases.
+* **Target User**: Users seeking standalone wallpapers.
+* **Entry Points**: Bottom nav "Wallpapers" tab, search action.
+* **Exit Points**: `SCR-006` (Fullscreen Preview), `SCR-008` (Vanguard Pass).
+* **Primary Action**: Tap wallpaper thumbnail to open fullscreen preview modal.
+* **Secondary Actions**: Filter by `AMOLED 95%+`, `PARALLAX 3D`, `WARRIORS`, `STOIC CREED`; favorite heart toggle.
+* **Components**: Top header with search bar and 4K Ultra chip, horizontal filter chips, stats ticker banner ("300+ EXCLUSIVE 4K CANVASES • ZERO ADS • ZERO COMPRESSION"), 2-column 9:16 vertical card grid with badges, bottom nav.
+* **States**: Normal, Loading, Empty, Offline (cached wallpapers with offline indicator).
+* **Stitch Reference**: `b028d16ebe5949ef8b39b5acc7733bf8`.
+* **Analytics Events**: `wallpaper_vault_viewed`, `wallpaper_filter_selected`, `wallpaper_card_clicked`.
 
 ---
 
-## SCREEN-SETTINGS-001: The Citadel (Settings)
-
-### Metadata
-- **Screen ID**: `SCREEN-SETTINGS-001`
-- **Name**: Application Settings & Preferences
-- **Purpose**: Manage notification schedules, widget styles, storage cache, and purchase restoration.
-- **User Goal**: Configure daily reminder time, clear cache, or restore purchases.
-- **Navigation Source**: Bottom Nav "Settings" tab.
-
-### Visual Hierarchy & Components
-1. **Preferences Group: Daily Discipline**:
-   - Toggle: *Daily Spartan Reminder* (On/Off).
-   - Time Picker: *Reminder Time* (Default: 08:00 AM).
-2. **Preferences Group: Armory & Storage**:
-   - *Clear Image Cache* (Displays current disk MB usage, 1-tap clear).
-3. **Preferences Group: Membership**:
-   - *Vanguard Pass Status* (Active / Inactive).
-   - *Restore Purchases* button.
-4. **Preferences Group: Privacy & Legal**:
-   - *Privacy Policy* (Opens internal viewer or browser).
-   - *Terms of Service*.
-   - *App Version & Build* (`v1.0.0 (1)`).
-
-### States
-- **Normal**: Settings loaded from DataStore.
-- **Offline**: Fully functional.
-- **Tests**: `SettingsScreenTest` verifies DataStore updates for notifications and cache clearing.
+### SCR-006: Wallpaper Fullscreen Preview & 1-Tap Apply Modal
+* **ID**: `SCR-006`
+* **Name**: Wallpaper Fullscreen Preview & 1-Tap Apply Modal
+* **Purpose**: Full-bleed immersive 4K preview with simulated system UI overlay and 1-tap wallpaper application.
+* **Target User**: Users ready to apply a specific wallpaper.
+* **Entry Points**: Tapping any wallpaper from `SCR-005`.
+* **Exit Points**: Back to `SCR-005`, system home screen on apply.
+* **Primary Action**: "SET BOTH HOME & LOCK SCREEN" master CTA.
+* **Secondary Actions**: "SET HOME SCREEN", "SET LOCK SCREEN", UI Overlay toggle (eye icon), 3D Parallax gyro toggle, "DOWNLOAD 4K RAW", "ADJUST CROP".
+* **Components**: Fullscreen image bleed, floating top controls (back, overlay toggle, gyro toggle), slide-up obsidian apply sheet, AMOLED zero-draw certification badge.
+* **States**: Normal, Applying, Applied, Crop mode active, Gyro active.
+* **Stitch Reference**: `906d16f32dc647be8152f722e54e1cf9`.
+* **Analytics Events**: `wallpaper_preview_opened`, `overlay_toggled`, `parallax_toggled`, `wallpaper_applied`.
 
 ---
 
-## SCREEN-PAYWALL-001: The Vanguard Pass
+### SCR-007: Spartan Widgets Forge
+* **ID**: `SCR-007`
+* **Name**: Spartan Widgets Forge
+* **Purpose**: Showcase, customize, and directly pin native Jetpack Glance widgets to the user's home screen in 1 tap.
+* **Target User**: Users wanting functional, chiseled stoic widgets.
+* **Entry Points**: Bottom nav "Widgets" tab.
+* **Exit Points**: Home screen on pin, `SCR-008` (Vanguard Pass).
+* **Primary Action**: "ADD TO HOME SCREEN" button on any widget card.
+* **Secondary Actions**: Accent selector (Bronze Metallic, Crimson Embers, Obsidian Mono), opacity slider (0% to 100%).
+* **Components**: Top header with "100% Native Glance" badge, sticky forge customizer bar, 4 live widget preview cards (Stoic Monolith Clock 2x2, Hoplite Shield Gauge 2x2, War Creed Ticker 4x1, Thermopylae Calendar 4x2), bottom nav.
+* **States**: Normal, Pinning requested, Pin granted, Permission denied.
+* **Stitch Reference**: `85e33e992ae74f71a5a01a2b666221bd`.
+* **Analytics Events**: `widgets_forge_viewed`, `widget_customized`, `widget_pin_requested`.
 
-### Metadata
-- **Screen ID**: `SCREEN-PAYWALL-001`
-- **Name**: Vanguard Pass Paywall Sheet
-- **Purpose**: Present the premium offering cleanly with dignified Spartan value propositions and zero deceptive urgency.
-- **User Goal**: Unlock exclusive wallpapers and premium widgets.
-- **Navigation Source**: Tapping locked wallpaper or premium widget option.
-- **Navigation Destinations**: In-app purchase sheet or dismiss back.
+---
 
-### Visual Hierarchy & Components
-1. **Dismiss Bar**: Down-swipe handle and close "X" icon.
-2. **Crest Header**: Weathered Bronze Spartan Shield emblem with crossed spears.
-3. **Headline**: DisplayMedium: *"THE VANGUARD PASS"*.
-4. **Benefit Bullets**:
-   - *All Current & Future Premium Spartan Wallpapers*
-   - *Exclusive Shield & Streak Glance Widgets*
-   - *Offline Content Pack Downloads*
-   - *Lifetime Access / One-Time Purchase (No recurring subscription trap)*
-5. **Pricing Button**: `SpartanButton`: *"UNLOCK FOREVER — $4.99"*.
-6. **Footer**: Restore Purchases link & Terms of Sale.
+### SCR-008: Vanguard Pass Paywall (Lifetime Unlock)
+* **ID**: `SCR-008`
+* **Name**: Vanguard Pass Paywall
+* **Purpose**: Convert free users into lifetime members via a high-converting, honest, subscription-free tribute page.
+* **Target User**: Users tapping locked vault themes, 4K raw downloads, or pro widgets.
+* **Entry Points**: Tapping locked items in `SCR-003`, `SCR-004`, `SCR-005`, `SCR-007`, or "Vanguard" badge in top bar.
+* **Exit Points**: Dismiss 'X' back to previous screen, purchase success state.
+* **Primary Action**: "UNLOCK VANGUARD PASS — ₹199" solid bronze button.
+* **Secondary Actions**: "RESTORE" purchases, "Terms of Honor", "Privacy Policy".
+* **Components**: Close button, embossed bronze helmet hero medallion, "BECOME A VANGUARD" header, 6-item Vanguard Arsenal feature card, limited launch 50% off pricing box (₹199 / $2.99 lifetime), Google Play security & family library trust badges.
+* **States**: Normal, Processing purchase, Purchase succeeded, Purchase failed, Network error.
+* **Stitch Reference**: `99f69724905342868e7dcc150caac233`.
+* **Analytics Events**: `paywall_viewed`, `paywall_source_tracked`, `checkout_initiated`, `purchase_completed`, `restore_clicked`.
 
-### States
-- **Normal**: Pricing loaded.
-- **Purchasing State**: Button displays spinner while Google Play Billing processes.
-- **Dismissed**: Instant closure without guilt-tripping dialogs.
+---
 
-### Tests
-- `PaywallScreenTest` verifies purchase initiation, entitlement unlocking, and dismissal.
+### SCR-009: Icon Pack Forge & Quick Styler
+* **ID**: `SCR-009`
+* **Name**: Icon Pack Forge & Quick Styler
+* **Purpose**: Preview, style, and apply 400+ handcrafted weathered bronze vector glyphs to Android launchers.
+* **Target User**: Users completing their visual overhaul.
+* **Entry Points**: Bottom nav "Icons" tab.
+* **Exit Points**: Launcher settings, app search.
+* **Primary Action**: "1-TAP APPLY TO LAUNCHER" master button.
+* **Secondary Actions**: Palette selector (Weathered Bronze, Obsidian Slate, Crimson Spartan), "REQUEST SPARTAN GLYPH", search app icons.
+* **Components**: Top header, quick-apply banner with launcher chips (Nova, Smart, Niagara, One UI, Pixel), simulated bottom dock preview with 5 chiseled glyphs, 4x4 categorized icon grid, icon request card, bottom nav.
+* **States**: Normal, Searching, Palette switched, Applying.
+* **Stitch Reference**: `4a7a0388e80644aba7ef0e60a9fea9bf`.
+* **Analytics Events**: `icons_forge_viewed`, `palette_switched`, `apply_icons_clicked`, `request_icon_clicked`.
+
+---
+
+### SCR-010: 1-Tap Apply Success Modal
+* **ID**: `SCR-010`
+* **Name**: 1-Tap Apply Success Modal
+* **Purpose**: Provide instant, reassuring feedback on the theme application sequence and celebrate device transformation.
+* **Target User**: Users who just initiated "1-Tap Apply Complete Theme".
+* **Entry Points**: Triggered from `SCR-004`.
+* **Exit Points**: Exit to Android Launcher ("VIEW MY NEW HOME SCREEN"), or stay in app ("FINE-TUNE WIDGETS & ICONS").
+* **Primary Action**: "VIEW MY NEW HOME SCREEN →" solid bronze button.
+* **Secondary Actions**: "FINE-TUNE WIDGETS & ICONS" outline button.
+* **Components**: Glowing circular Spartan Lambda seal, "FORGING SPARTAN TRANSFORMATION" header, 4-step progress checklist (Wallpaper applied, Glance widget pinned, Icons ready, Soundpack active), mini device preview thumbnail, telemetry bar (Apply: 1.4s, Battery: 0.0%, Cache: 18.2 MB).
+* **States**: In-progress (step-by-step ticks), Complete (100%).
+* **Stitch Reference**: `d9ec56f33bb943569648908cc2c3080a`.
+* **Analytics Events**: `theme_apply_started`, `theme_apply_step_completed`, `theme_apply_succeeded`, `exit_to_launcher_clicked`.
+
+---
+
+### SCR-011: Settings & Vault Management
+* **ID**: `SCR-011`
+* **Name**: Settings & Vault Management
+* **Purpose**: Manage AMOLED efficiency, gyroscope battery-saving armor, offline wallpaper storage, and Google Play billing restore.
+* **Target User**: Users customizing performance and system settings.
+* **Entry Points**: Bottom nav "Settings" tab.
+* **Exit Points**: Sub-settings, Google Play Store rating.
+* **Primary Action**: Toggles for AMOLED true black and battery-saver armor.
+* **Secondary Actions**: "CLEAR WALLPAPER CACHE", "Restore Google Play Purchases", "The Spartan Manifesto".
+* **Components**: Top header with build tag `v1.0.0 (PHALANX)`, Vanguard Lifetime Status card, Display & AMOLED Efficiency settings group, Widgets & Launcher Integration group, Storage & Cache group with memory progress bar, Honor & Support group, bottom nav.
+* **States**: Normal, Cache cleared, Purchases restored, Network error.
+* **Stitch Reference**: `5378d88566804f85a95a34ab892a6114`.
+* **Analytics Events**: `settings_viewed`, `amoled_toggled`, `cache_cleared`, `restore_purchases_clicked`.

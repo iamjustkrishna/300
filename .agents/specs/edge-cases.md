@@ -1,72 +1,50 @@
-# End-to-End Edge Cases Specification
+# 300 — Edge Cases, Permissions & System Fallbacks
 
-This document details the exact system behavior, failure mitigation, and verification protocol for every conceivable edge case in **300**.
-
----
-
-## 1. Lifecycle & Process States
-
-| Edge Case ID | Scenario | System Behavior & Mitigation | Test Verification |
-|---|---|---|---|
-| `EDGE-LIFE-01` | First launch | Check DataStore `isOnboardingCompleted == false`. Render `SCREEN-ONBOARD-001` with zero flicker. Seed initial Room database records synchronously or with high priority. | `OnboardingFlowTest.firstLaunchOpensOath` |
-| `EDGE-LIFE-02` | Second launch | Check DataStore `isOnboardingCompleted == true`. Immediately navigate to `SCREEN-HOME-001`. Preload active streak and today's challenge from Room. | `HomeFlowTest.secondLaunchDirectToHome` |
-| `EDGE-LIFE-03` | Interrupted onboarding (App killed mid-flow) | Onboarding state (step 1, 2, or 3) is saved in DataStore. On relaunch, user resumes at their last completed step. If killed before step 3, user is never dropped into an unconfigured Home screen. | `OnboardingFlowTest.resumesAtLastStep` |
-| `EDGE-LIFE-04` | Process death & recreation | ViewModels implement `SavedStateHandle`. Active scroll positions in Armory and selected filters survive OS process kill and restore cleanly. | `ViewModelSavedStateTest.stateRestored` |
-| `EDGE-LIFE-05` | Screen rotation / Configuration change | UI state is decoupled in Jetpack `ViewModel`. Zero re-fetching of database or re-decoding of bitmaps on rotation. | `ComposeConfigurationChangeTest` |
-| `EDGE-LIFE-06` | Background / Foreground transition | App pauses non-critical coroutines on `onStop()`. On `onStart()`, re-checks current calendar date to see if day rolled over (new challenge required). | `LifecycleObserverTest.dateRollChecked` |
-| `EDGE-LIFE-07` | Device restart | Glance widgets register `ACTION_BOOT_COMPLETED` receiver (if permitted) or refresh via WorkManager to ensure streak display remains accurate post-reboot. | `BootReceiverTest.widgetsRefreshed` |
+> **Document Version**: 2.0.0 (Phase 1 Approved Baseline)  
+> **Status**: APPROVED
 
 ---
 
-## 2. Network & Connectivity
+## 1. System Permissions Matrix & Denial Handling
 
-| Edge Case ID | Scenario | System Behavior & Mitigation | Test Verification |
-|---|---|---|---|
-| `EDGE-NET-01` | Zero Internet / Airplane Mode | **100% Offline-First Guarantee**. All core wallpapers, all 30 initial challenges, and streak history are pre-bundled locally. Zero blocking network spinners. Full app functionality retained. | `OfflineIntegrationTest.fullAppAccessible` |
-| `EDGE-NET-02` | Slow / High-Latency Network | Network requests (if fetching remote content packs in future) run asynchronously with 10s timeouts and instant fallback to local cache. UI never hangs. | `RepositoryTimeoutTest.fallbackToLocal` |
-| `EDGE-NET-03` | Interrupted asset download | Downloads stream to a temporary `.tmp` file and rename atomically upon SHA-256 verification. Corrupted or partial files are discarded automatically. | `AssetDownloadTest.atomicRename` |
-
----
-
-## 3. Permissions & System Hardware
-
-| Edge Case ID | Scenario | System Behavior & Mitigation | Test Verification |
-|---|---|---|---|
-| `EDGE-PERM-01` | Notification permission denied (Android 13+) | App functions completely without notifications. Settings screen shows reminder toggle as disabled with a subtle prompt: *"Enable in system settings to receive your daily Spartan call."* Never harass user. | `NotificationPermissionTest.gracefulDenial` |
-| `EDGE-PERM-02` | WallpaperManager system restriction / Knox / Enterprise policy | Some enterprise or managed devices restrict wallpaper changes. Catch `SecurityException` / `IOException` from `WallpaperManager.setBitmap()`. Display dignified dialog: *"Your device system restricts automated wallpaper application. Tap to save image to Pictures."* | `WallpaperManagerErrorTest.catchesException` |
-| `EDGE-PERM-03` | Insufficient disk storage (< 20MB free) | Catch `IOException` on caching. Evict oldest LRU cached images. If still insufficient, render direct fallback from APK assets. | `DiskCacheTest.lruEvictionTriggered` |
-| `EDGE-PERM-04` | Low RAM / Memory pressure (`onTrimMemory`) | Coil image loader automatically trims memory cache on `TRIM_MEMORY_RUNNING_CRITICAL`. All non-visible wallpaper bitmaps are recycled immediately. | `MemoryTrimTest.cachesEvicted` |
-| `EDGE-PERM-05` | Battery Saver Mode active | Disable background shimmers and animations. Glance widget update frequency throttled to strictly user-interactive events. | `BatterySaverTest.animationsDisabled` |
+| Capability | Android API | Permission Key | Denial UX Fallback |
+| :--- | :--- | :--- | :--- |
+| **Set Wallpaper** | Android 10–15 | `android.permission.SET_WALLPAPER` (Normal) | Auto-granted by OS. If OEM security prevents direct apply, triggers fallback `ACTION_ATTACH_DATA` intent to let system crop picker handle it. |
+| **Download Raw 4K to Gallery** | Android 10+ (API 29+) | Scoped Storage (`MediaStore.Images.Media`) | Zero runtime storage permissions needed on API 29+! Files are inserted directly into `Pictures/300_Spartan`. |
+| **Pin Glance Widget** | Android 10+ | `AppWidgetManager.requestPinAppWidget` | If launcher rejects pin intent (e.g. strict enterprise launcher), app shows a clean instructional dialog: *"Long-press your home screen → Widgets → Select 300: Spartan Widgets"*. |
+| **Haptic Feedback** | All APIs | `VIBRATOR_SERVICE` | Gracefully ignored on devices without linear resonant actuators (no crashes). |
 
 ---
 
-## 4. Time, Calendar & Clock Manipulation
+## 2. Battery & Power Conservation Edge Cases
 
-| Edge Case ID | Scenario | System Behavior & Mitigation | Test Verification |
-|---|---|---|---|
-| `EDGE-TIME-01` | Midnight / Day rollover while app is open | Day rollover listener updates `todayChallenge` automatically when local time passes 00:00 without requiring app restart. | `TimeRolloverTest.updatesAtMidnight` |
-| `EDGE-TIME-02` | Timezone change (e.g., User flies London -> Tokyo) | Streak calculations use normalized UTC timestamps alongside local calendar dates. Grace period prevents unfair streak loss if clock shifts backward or forward within 24 hours. | `StreakCalculatorTest.timezoneShiftHandled` |
-| `EDGE-TIME-03` | Clock manipulation / Cheating | User changes phone clock forward 10 days to unlock streaks. System detects monotonic uptime mismatch or past completion dates. Prevents future challenge completion before valid elapsed time. | `StreakSecurityTest.detectsClockDrift` |
-| `EDGE-TIME-04` | Daylight Saving Time (DST) transitions | DST shifts (23-hour or 25-hour days) do not break streak logic or daily notification alarms (uses `ZoneId.systemDefault()`). | `DstTransitionTest.calculatesCorrectly` |
+### 2.1 Low Battery Armor Protocol (< 20% Battery Level)
+* When device battery level drops below 20%, the app automatically:
+  1. Pauses the 3D Gyroscope sensor listener to eliminate CPU/sensor wake locks.
+  2. Disables animated ember particle effects.
+  3. Enforces static pure OLED black background (`#080809`).
+  4. Drops Glance widget refresh rate from 15 minutes to 60 minutes.
 
----
-
-## 5. Monetization & Purchases
-
-| Edge Case ID | Scenario | System Behavior & Mitigation | Test Verification |
-|---|---|---|---|
-| `EDGE-MON-01` | Failed / Cancelled In-App Purchase | Reset paywall button state from "Processing" to normal. Show brief non-accusatory message: *"Purchase was not completed."* User returns to previous screen without being blocked. | `BillingTest.handlesCancellation` |
-| `EDGE-MON-02` | Restore purchases on new device / reinstall | Settings -> "Restore Purchases" queries Google Play Billing cache and unlocks Vanguard Pass immediately if active entitlement found. | `BillingTest.restoresPurchases` |
-| `EDGE-MON-03` | Free user attempts to tap locked wallpaper | Never crash or lock UI. Open `SCREEN-PAYWALL-001` with clear dismiss option. Free wallpapers remain fully accessible. | `PaywallTriggerTest.opensPaywall` |
+### 2.2 AMOLED True Black Verification
+* All static wallpapers undergo automated pixel histogram verification: at least 95% of pixels must have RGB values `<= 12` (sub-pixel shutoff threshold for Samsung/BOE OLED panels).
 
 ---
 
-## 6. Form Factor & Accessibility Variations
+## 3. Network & Offline Edge Cases
 
-| Edge Case ID | Scenario | System Behavior & Mitigation | Test Verification |
-|---|---|---|---|
-| `EDGE-FORM-01` | Foldable unfolded mid-operation | Dynamic configuration change triggers recomposition. Wallpaper grid adjusts columns from 2 to 3/4 instantly without reloading data or losing scroll offset. | `FoldableFoldUnfoldTest.retainsScrollOffset` |
-| `EDGE-FORM-02` | Multi-Window / Split-screen mode | App window resizes to half-screen. Layout adapts as a `Compact` size class. Floating elements remain within visible bounds. | `SplitScreenTest.layoutAdapts` |
-| `EDGE-FORM-03` | 200% System Font Scaling | Container cards expand vertically. No text is clipped or ellipsized out of legibility. Buttons remain clickable and accessible. | `FontScaleTest.noTextClippingAt200Percent` |
-| `EDGE-FORM-04` | TalkBack Screen Reader active | Every clickable element has semantic click action and clear label. Non-decorative images have informative content descriptions; decorative graphics set to `null`. | `AccessibilitySemanticsTest.allClickablesLabeled` |
-| `EDGE-FORM-05` | Reduced Motion setting enabled | Compose animations respect system setting and transition with 0ms duration. | `ReducedMotionTest.animationsDisabled` |
+1. **Total Airplane Mode / Offline Launch**:
+   - The app reads directly from the local Room database and DataStore.
+   - 3 Starter Themes and 18 Wallpapers are bundled as compressed vector/WebP assets locally in the APK assets; the app is 100% functional on cold start without an internet connection.
+2. **Network Drops Mid-Download**:
+   - Downloads use OkHttp with `Range` resume support and MD5 hash checksum verification. Broken files are pruned automatically; partial corrupted images are never written to disk.
+
+---
+
+## 4. Google Play Billing Edge Cases
+
+1. **User Purchases Vanguard Pass on Phone A, Installs on Phone B**:
+   - Tapping "RESTORE" queries `BillingClient.queryPurchasesAsync()`. If a valid `vanguard_lifetime_pass` token is found, all features unlock instantly.
+2. **Payment Cancelled / Pending (e.g., UPI / Family Approval Pending)**:
+   - UI displays a subtle "Payment Pending" banner without granting access until Google Play confirms `PurchaseState.PURCHASED`.
+3. **Refund Processed via Google Play**:
+   - On next launch, `queryPurchasesAsync()` detects token revocation and gracefully reverts user to the Free tier without crashing or wiping local cache.

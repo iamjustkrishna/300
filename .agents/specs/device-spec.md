@@ -1,81 +1,61 @@
-# Device & Responsive Behavior Specification
+# 300 — Device & Responsive Specification
+
+> **Document Version**: 2.0.0 (Phase 1 Approved Baseline)  
+> **Status**: APPROVED  
+> **Target OS**: Android 10+ (API 29 to API 35)
 
 ---
 
-## 1. Supported Ecosystem Matrix
+## 1. Supported Form Factors & Adaptive Layout Rules
 
-Targeting **Android 10 (API 29) and above**.
+Rather than designing for a single fixed 1080x2400 resolution, 300 defines adaptive layout rules across 4 device classes using Material 3 Window Size Classes (`Compact`, `Medium`, `Expanded`).
 
-| Category | Physical Diagonal | Typical Resolution | WindowWidthSizeClass | Adaptive Behavior |
-|---|---|---|---|---|
-| **Compact Phone** | 4.7" - 5.5" | 360 x 640 - 360 x 780 dp | `Compact` (<600dp) | Single column, compressed vertical spacing (12dp), compact headers, scrollable containers. |
-| **Standard Phone** | 5.8" - 6.4" | 393 x 851 - 412 x 915 dp | `Compact` (<600dp) | Baseline 8dp grid, standard bottom navigation, 2-column wallpaper catalog. |
-| **Large / Tall Phone** | 6.7" - 6.9"+ | 412 x 960 dp (~21:9) | `Compact` (<600dp) | Hero imagery takes advantage of vertical height; bottom controls pinned within thumb reach. |
-| **Foldable (Folded)** | ~6.2" cover | 320 - 360 x 840 dp (~23:9)| `Compact` (<600dp) | Narrow single column; buttons wrap text cleanly without truncation. |
-| **Foldable (Unfolded)**| ~7.6" inner | 674 x 840 dp (~1:1) | `Medium` / `Expanded` | Dual-pane home dashboard; 3-4 column wallpaper catalog; navigation rail. |
-| **Tablet (Portrait)** | 10" - 12" | 800 x 1280 dp (16:10) | `Medium` / `Expanded` | Multi-column grid, max-width constraints on readable text (max 640dp). |
-| **Tablet (Landscape)**| 10" - 12" | 1280 x 800 dp (16:10) | `Expanded` (>840dp) | Master-detail split layout; permanent navigation rail; 4-column wallpaper catalog. |
-
----
-
-## 2. Density Bucket Handling
-
-| Density Bucket | Scale Factor | Strategy for 300 |
-|---|---|---|
-| `mdpi` (160 dpi) | 1.0x | Vector Drawables for all icons; WebP assets sampled appropriately. |
-| `hdpi` (240 dpi) | 1.5x | Vector Drawables; Coil memory cache sized proportionally. |
-| `xhdpi` (320 dpi) | 2.0x | High-res vector render; 720p thumbnail downsampling. |
-| `xxhdpi` (480 dpi) | 3.0x | Standard modern phone baseline; 1080p full-res wallpaper decoding. |
-| `xxxhdpi` (640 dpi)| 4.0x | 1440p / 4K asset resolution pipeline with target size decoders. |
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                    DEVICE CLASS RESPONSIVE BEHAVIOR                         │
+├─────────────────┬───────────────────┬───────────────┬───────────────────────┤
+│ Device Class    │ Screen Width (dp) │ Grid Columns  │ Layout Architecture   │
+├─────────────────┼───────────────────┼───────────────┼───────────────────────┤
+│ Compact Phone   │ < 600dp           │ 2 Columns     │ Single-column feed,   │
+│                 │ (e.g. Pixel 8)    │               │ docked bottom nav     │
+├─────────────────┼───────────────────┼───────────────┼───────────────────────┤
+│ Medium Foldable │ 600dp – 840dp     │ 3 Columns     │ Adaptive feed,        │
+│ (Folded/Unfold) │ (e.g. Fold 6)     │               │ dual-pane detail      │
+├─────────────────┼───────────────────┼───────────────┼───────────────────────┤
+│ Expanded Tablet │ > 840dp           │ 4 Columns     │ Permanent nav rail    │
+│                 │ (e.g. Pixel Tab)  │               │ on left, split preview│
+└─────────────────┴───────────────────┴───────────────┴───────────────────────┘
+```
 
 ---
 
-## 3. System Navigation & Inset Handling
+## 2. Navigation & System Bar Handling
 
-### 3.1. Gesture Navigation Mode (Edge-to-Edge)
-- Window sets `enableEdgeToEdge()`.
-- Top AppBars pad for `WindowInsets.statusBars`.
-- Bottom Navigation and sticky action buttons pad for `WindowInsets.navigationBars`.
-- Interactive swipe-to-preview surfaces respect system back gesture edge exclusion zones.
+### 2.1 Edge-to-Edge System Bars (Android 10–15)
+* 300 operates **100% edge-to-edge** (`enableEdgeToEdge()`):
+  - Status bar: Transparent with light icons (high contrast over dark obsidian canvas).
+  - Navigation bar: Transparent with gesture bar padding applied via `WindowInsets.navigationBars`.
+* Content never clips beneath cutouts, camera punch-holes, or curved display edges.
 
-### 3.2. 3-Button Navigation Mode
-- Bottom navigation bar properly positions above the system button bar (typically 48dp - 56dp height).
-- Zero content overlapping or occlusion behind system back/home/recents buttons.
-
----
-
-## 4. Component-Level Responsive Contracts
-
-### 4.1. SpartanButton
-- **Minimum Width**: 120dp.
-- **Maximum Useful Width**: 480dp (on tablets/unfolded foldables, buttons never stretch full-screen across 1000dp+; they center with `Modifier.widthIn(max = 480.dp)`).
-- **Text Wrapping**: If system font scale is 200%, the button expands its vertical height from 56dp to 72dp+ to accommodate two lines of text without clipping.
-
-### 4.2. Wallpaper Grid (`LazyVerticalGrid`)
-- **Compact (<600dp)**: `GridCells.Fixed(2)`.
-- **Medium (600dp - 840dp)**: `GridCells.Fixed(3)` or `GridCells.Adaptive(minSize = 160.dp)`.
-- **Expanded (>840dp)**: `GridCells.Fixed(4)` or `GridCells.Adaptive(minSize = 180.dp)`.
-- **Aspect Ratio**: Each thumbnail maintains a strict 9:16 aspect ratio box with `ContentScale.Crop`.
-
-### 4.3. Daily Challenge Card
-- **Small Screens**: Single column with vertical stacking (Title -> Description -> Action Button).
-- **Tablets / Landscape**: Horizontal flex (Title & Description on left 60%, Action button & Streak badge on right 40%).
-
-### 4.4. Fullscreen Wallpaper Preview & Cropping
-- **Image Focal Point**: Center-weighted.
-- **Aspect Ratio Adaptability**: On ultra-tall (21:9) or wide (1:1 / 16:10) screens, the wallpaper scaler crops evenly from outer edges while preserving the central warrior focal point.
-- **Preview Canvas**: The interactive wallpaper preview container always matches the exact hardware aspect ratio of the host display.
+### 2.2 Gesture Navigation vs. 3-Button Navigation
+* **Gesture Navigation**: Floating bottom navigation bar floats 16dp above the home gesture pill with zero touch overlap.
+* **3-Button Navigation**: Navigation bar automatically respects system inset height, adding bottom padding so CTAs are never obscured by the system Back, Home, or Recents buttons.
 
 ---
 
-## 5. System Accessibility & Settings Adaptation
+## 3. Foldables & Dual-Screen Experience
 
-| System Setting | App Behavior |
-|---|---|
-| **System Dark Mode** | Default application visual identity is natively dark obsidian (`#0B0B0C`). |
-| **System Light Mode** | App remains in its signature brutalist dark Spartan identity (personalization & theme apps maintain brand fidelity; dark mode preserves OLED power and cinematic immersion). |
-| **Font Scaling (up to 200%)** | All typography uses `sp`. Containers use flexible heights (`wrapContentHeight()`) rather than fixed `dp` heights. Text wraps smoothly. |
-| **Display Scaling (Density shift)** | Density changes adjust dp calculations automatically without broken layout bounds. |
-| **Reduced Motion** | In-app animations (shimmers, state flips, dialog reveals) are disabled or swapped for 0ms transitions. |
-| **High Contrast Text** | Border outlines (`BorderSubtle`) scale up contrast; text glyphs retain crisp edge separation. |
-| **Screen Reader (TalkBack)** | Full semantics tree verified; touch targets enforce 48dp x 48dp minimums. |
+* **Folded Mode (Cover Screen, ~380dp)**: Standard compact phone layout.
+* **Unfolded Mode (Inner Screen, ~760dp - 840dp)**:
+  - Theme Detail (`SCR-004`): Transitions from vertical scrolling into a **Dual-Pane Battle Layout**:
+    * Left Pane (45%): Realistic phone preview mockup with Home/Lock toggles.
+    * Right Pane (55%): Included components blueprint, specs, and master "Apply" action dock.
+* **Posture Awareness**: Hinge/fold line is detected via Jetpack WindowManager; content avoids the crease.
+
+---
+
+## 4. Tablets (10"–12" Landscape & Portrait)
+
+* **Navigation**: Bottom navigation dock transforms into an anchored **Left Navigation Rail (72dp width)** with vertical Spartan Lambda logo and bronze tab icons.
+* **Wallpaper Vault (`SCR-005`)**: 4-column responsive grid with staggered aspect ratios.
+* **Theme Preview**: Split canvas allowing side-by-side inspection of both Home Screen and Lock Screen setups simultaneously.

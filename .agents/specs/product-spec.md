@@ -1,111 +1,100 @@
-# Product Specification: 300
+# 300 — Product Specification (Phase 1 Baseline)
+
+> **Document Version**: 2.0.0 (Phase 1 Validated Baseline)  
+> **Status**: APPROVED  
+> **Package**: `space.iamjustkrishna.threehundred`  
+> **Target Android Versions**: Android 10+ (API 29 to API 35)
 
 ---
 
-## 1. Product Summary & Identity
-- **Product Name**: 300
-- **Tagline**: Forge Your Device. Master Your Discipline.
-- **Application ID**: `space.iamjustkrishna.threehundred`
-- **Core Emotional Hook**: *"My phone feels like a different device now."*
-- **Visual & Atmospheric Vibe**: Cinematic, brutalist, minimal, dark, powerful, and deeply polished. Inspired by Spartan warrior ethos, iron resolve, weathered bronze, crimson cloaks, and stoic focus. Absolutely zero cartoonish mascots, glowing rainbow neon, or generic wallpaper dumps.
+## 1. Product Vision & Core Promise
+
+**300** is an elite Android personalization suite engineered with a cinematic, brutalist, minimal, dark Spartan aesthetic.
+
+### Core Promise
+> **"Transform your phone into a cohesive cinematic warrior environment."**
+
+The product transforms a cluttered, generic smartphone into an austere instrument of strength, focus, and discipline in **one tap**. It is not a wallpaper downloader; it is a **complete identity and aesthetic overhaul**.
 
 ---
 
-## 2. Target Audience & User Problems
+## 2. Product Hypothesis & Scope Evolution
 
-### Primary Audiences
-1. **The Modern Stoic & Discipline Seeker**: Individuals striving to build physical grit, mental endurance, and daily focus. They want their smartphone—often a source of distraction—to become a solemn reminder of their goals.
-2. **The High-End Android Minimalist**: Discerning Android power users who curate dark, clean, brutalist home screens, value high-resolution art, and appreciate flawless native performance.
-
-### Core Problems Solved
-- **Digital Dissipation**: Standard phones are designed for dopamine addiction and mindless scrolling.
-- **Cheap, Intrusive Personalization Apps**: Wallpaper and customization apps in the Play Store are universally ruined by loud video ads, low-quality internet rips, and broken widgets.
-- **Fluffy, Annoying Habit Trackers**: Existing habit apps feel like children's games with colorful cartoons, nagging notifications, and expensive recurring subscriptions.
+### 2.1 The Pivot: Aesthetic Transformation Over Habit Tracking
+* **Original Hypothesis**: An app combining wallpapers, widgets, daily discipline challenges, and streak tracking.
+* **Validated Phase 1 Decision (ADR-005)**: Habit tracking and streak counters are **strictly excluded from the MVP**. Empirical research demonstrated that users seeking home-screen personalization resent productivity guilt trips and multi-purpose apps with identity crises.
+* **Refocused Value**: Pure **Identity + Aesthetics + Phone Personalization** executed with uncompromising craft.
 
 ---
 
-## 3. Product Promise & Core Loops
+## 3. Target Audience Rankings
 
-### The Product Promise
-Within 60 seconds of installing 300:
-1. The user's home screen and lockscreen are visually transformed with austere, cinematic Spartan artwork.
-2. A brutalist Glance widget is placed on their home screen displaying their active streak and daily stoic challenge.
-3. The user commits to Day 1 of the 300 Discipline Journey.
-
-### The Daily Core Loop
-```
-[ Morning Glance ]
-Widget displays Day's Spartan Maxim & Active Streak.
-       │
-       ▼
-[ Action / Execution ]
-User confronts their real-world discipline task (e.g. cold plunge, hard workout, deep focus sprint).
-       │
-       ▼
-[ In-App Commitment ]
-Open 300 (< 500ms cold boot) -> Tap "I Have Conquered" -> Feel heavy haptic thud -> Streak increments.
-       │
-       ▼
-[ Evolution & Reward ]
-Unlock or rotate to a new daily Spartan wallpaper and widget theme reflecting their growing streak.
-```
+1. **Primary: Masculine Aesthetic Seekers & Fitness/Gym Community (Age 18–34)**
+   - Prioritize stoicism, dark minimalism, and physical/mental discipline.
+   - Lock screen is viewed 80–120 times daily; serves as a psychological focus cue.
+   - High willingness to pay for personal identity and aesthetic prestige.
+2. **Secondary: Android Customization Power Users (r/androidthemes, Nova/Smart Launcher)**
+   - Fatigued by configuring 4 separate apps (KWGT + launcher + icon packs + Backdrops).
+   - High willingness to buy one-time lifetime pro utilities.
+3. **Tertiary: Dark/Brutalist Gamers & Film Admirers (Elden Ring, God of War, 300)**
+   - Seeking pure OLED black themes without neon gamer clutter.
 
 ---
 
-## 4. Onboarding & First-Session Experience (FSE)
-The first session must take under 45 seconds from launch to phone transformation:
-1. **Step 1: The Oath (Identity)**:
-   - Full-screen obsidian background with subtle crimson vignette.
-   - Headline: *"WHO COMMANDS THIS DEVICE?"*
-   - Selection: Choose Primary Path (Iron Body, Cold Mind, Sovereign Focus).
-2. **Step 2: The Armory (Day 1 Personalization)**:
-   - Screen renders preview of "The Vanguard" wallpaper with real-time lockscreen clock overlay.
-   - Primary button: *"Claim Armor (Apply Wallpaper)"*.
-   - 1-tap invokes Android `WallpaperManager` to set Home and Lock screen.
-3. **Step 3: The First Challenge**:
-   - Screen presents Day 1 Challenge: *"Conquer the first hour without distraction. No social media. Complete 50 pushups or 20 minutes of deliberate reading."*
-   - User commits: *"I Will Stand"* -> Onboarding complete -> Enters Home Screen.
+## 4. Monetization Strategy
+
+* **Model**: Freemium with **One-Time Lifetime Unlock ("Vanguard Pass")**.
+* **Launch Price**: **₹199 INR (~$2.99 USD)** (Anchor price: ₹399 / $4.99).
+* **Payment Mechanism**: Google Play In-App Billing (Non-consumable).
+* **Why Subscriptions Were Rejected**: The collapse and shutdown of MKBHD's "Panels" wallpaper app ($50/year subscription) on December 31, 2025 proved that subscriptions provoke severe backlash for visual digital assets. A fair, one-time lifetime price produces high conversion, 5-star ratings, and zero refund friction.
 
 ---
 
-## 5. Explicit MVP Scope Boundary
+## 5. MVP Feature Specifications
 
-### In MVP (v1.0.0)
-- **Spartan Wallpaper Engine**:
-  - 15 handcrafted, ultra-high-resolution dark Spartan wallpapers bundled locally.
-  - Interactive full-screen preview with lockscreen clock and home app grid toggle.
-  - 1-tap system wallpaper setter (Home screen, Lock screen, or Both).
-- **Daily Discipline & Streak System**:
-  - 30 curated daily stoic challenges stored in local Room database.
-  - 1-tap completion with satisfying heavy metallic haptic feedback.
-  - Consecutive streak counter with automated daily validation and grace periods.
-  - Milestone unlock badges (Day 3: Bronze, Day 7: Iron, Day 14: Steel, Day 30: Vanguard).
-- **Jetpack Glance Home-Screen Widgets**:
-  - Minimal Spartan Maxim Widget (2x1 / 3x2).
-  - Shield & Streak Glance Widget (2x2 / 4x2).
-  - Instant synchronization when in-app challenge is checked off.
-- **100% Offline-First**:
-  - Zero mandatory login or account creation.
-  - Complete functionality in airplane mode.
-- **Freemium Entitlement Architecture**:
-  - Core 10 wallpapers and all 30 daily challenges 100% free.
-  - 5 exclusive elite wallpapers and premium widget variants marked as "Vanguard Tier" with preview paywall.
+### 5.1 Curated 4K Wallpaper Engine
+- Minimum 95% True Black (`#080809` or `#000000`) on OLED panels to eliminate sub-pixel power draw.
+- Categories: *True AMOLED (95%+), Warriors, Chiseled Armor, Stoic Creed*.
+- Fullscreen interactive preview with UI overlay toggles (simulated clock and app dock) to test readability before applying.
+- 1-Tap apply to Home Screen, Lock Screen, or Both via Android `WallpaperManager`.
+- Full 4K uncompressed raw download to gallery.
 
-### Out of MVP (Post-Launch Roadmap)
-- Live video wallpapers (SurfaceView engine scheduled for Phase 14).
-- Cloud sync / social leaderboards (deliberately avoided to prevent distractions and server overhead).
-- Third-party launcher icon packs.
+### 5.2 Complete Phalanx Theme Bundles
+- Pre-packaged aesthetic sets containing:
+  1. 4K Wallpaper.
+  2. Matching Jetpack Glance Home-Screen Widget.
+  3. Weathered Bronze Icon Glyphs.
+  4. Spartan Soundpack & System Accent.
+- 1-Tap Complete Apply flow that executes the transformation in under 2 seconds.
+
+### 5.3 Native Jetpack Glance Home-Screen Widgets
+- 100% native Android widgets built with `androidx.glance:glance-appwidget`. Zero KWGT required.
+- Direct 1-tap "Add to Home Screen" pinning via Android `AppWidgetManager.requestPinAppWidget`.
+- 4 Core Widget Presets:
+  1. **The Stoic Monolith Clock (2x2)**: Chiseled Roman numerals, Spartan date, battery arc gauge.
+  2. **The Hoplite Shield Gauge (2x2)**: Circular weathered bronze shield with dynamic battery perimeter meter.
+  3. **War Creed & Maxim Ticker (4x1)**: Rotating austere quotes ("Win in silence", "Return with your shield or on it").
+  4. **Thermopylae War Calendar (4x2)**: 7-day tactical battle calendar with crimson wax seal.
+
+### 5.4 Weathered Bronze Icon Pack & Quick Styler
+- 400+ vector glyphs styled in antique weathered bronze, obsidian slate, and crimson accents.
+- Direct compatibility with Nova, Smart, Niagara, Samsung One UI, and stock Pixel Launcher (via shortcuts).
+
+### 5.5 Vanguard Pass (Paywall & Lifetime Membership)
+- Unlocks 15+ Vault Themes, 300+ 4K Wallpapers, all 6 Glance widgets, all 400+ icons, and the Hoplite soundpack.
+- Lifetime purchase verification and "Restore Purchases" flow.
+
+### 5.6 Settings, Battery Optimization & Vault Storage
+- AMOLED battery-saving armor mode.
+- 3D Gyro Parallax tilt toggle with auto-pause below 20% battery.
+- Local offline cache manager (cleans temporary wallpaper downloads).
 
 ---
 
-## 6. Retention & Notification Protocol
-- **Single Daily Notification**: Sent at user-selected hour (default: 08:00 AM) with brief, commanding text (e.g., *"Spartan, Day 12 awaits. Do not let your shield fall."*).
-- Never send more than 1 notification per day.
-- Notifications completely disabled if user turns them off in Settings.
+## 6. Deliberately Rejected Features (Explicit Exclusions)
 
----
-
-## 7. Privacy & Security Expectations
-- Zero tracking of personal identity, contacts, location, or browsing habits.
-- Local data stored securely via Room and DataStore on device.
-- Minimal permissions: `SET_WALLPAPER`, `POST_NOTIFICATIONS` (Android 13+ contextual opt-in).
+1. **Habit & Streak Trackers**: Strictly out of scope.
+2. **Subscriptions**: Strictly out of scope.
+3. **Banner Ads & Video Interstitials**: Strictly out of scope.
+4. **Mandatory User Accounts / Social Logins**: Strictly out of scope.
+5. **AI Image Generation in MVP**: Post-MVP exploration only ("Turn Yourself Into Sparta").

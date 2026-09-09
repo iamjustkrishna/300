@@ -1,163 +1,77 @@
-# State & Data Architecture Specification
+# 300 — Screen State Specification (8 Canonical UI States)
+
+> **Document Version**: 2.0.0 (Phase 1 Validated Baseline)  
+> **Status**: APPROVED  
+> **Principle**: No screen may be implemented in Phase 2 without handling all 8 canonical states.
 
 ---
 
-## 1. Domain Models & Contracts
+## 1. The 8 Canonical UI States
 
-### 1.1. Wallpaper Model
-```kotlin
-data class Wallpaper(
-    val id: String,
-    val title: String,
-    val subtitle: String,
-    val category: WallpaperCategory,
-    val assetPath: String,
-    val isPremium: Boolean,
-    val downloadUrl: String? = null,
-    val tags: List<String> = emptyList()
-)
+Every primary screen in 300 (`SCR-003`, `SCR-004`, `SCR-005`, `SCR-006`, `SCR-007`, `SCR-009`) implements the following 8 canonical states:
 
-enum class WallpaperCategory {
-    ALL,
-    SHIELDS,
-    RUINS,
-    BRONZE,
-    BATTLEFIELD
-}
 ```
+                  ┌───────────────┐
+                  │ 1. First-Time │
+                  └───────┬───────┘
+                          │ (Complete Onboarding)
+                          ▼
+                  ┌───────────────┐
+            ┌────►│   2. Normal   │◄────┐
+            │     └───────┬───────┘     │
+ (Retry OK) │             │ (Fetch)     │ (Resolved)
+            │             ▼             │
+     ┌──────┴──────┐┌───────────┐┌──────┴──────┐
+     │ 5. Offline  ││3. Loading ││  6. Error   │
+     └─────────────┘└─────┬─────┘└─────────────┘
+                          │ (Zero Data)
+                          ▼
+                   ┌─────────────┐
+                   │  4. Empty   │
+                   └─────────────┘
 
-### 1.2. Daily Challenge Model
-```kotlin
-data class DailyChallenge(
-    val dayNumber: Int, // 1 to 300
-    val title: String,
-    val quote: String,
-    val quoteAuthor: String,
-    val taskDescription: String,
-    val focusArea: String,
-    val isCompleted: Boolean = false,
-    val completedAtUtcMillis: Long? = null
-)
-```
-
-### 1.3. Streak State Model
-```kotlin
-data class StreakInfo(
-    val currentStreakDays: Int,
-    val longestStreakDays: Int,
-    val totalDaysConquered: Int,
-    val lastCompletedDateUtc: String?, // YYYY-MM-DD
-    val currentMilestone: MilestoneTier,
-    val isTodayCompleted: Boolean
-)
-
-enum class MilestoneTier(val requiredDays: Int, val title: String) {
-    THE_FIRST_STAND(3, "The First Stand"),
-    THE_PHALANX(7, "The Phalanx"),
-    THE_SHIELD_WALL(14, "The Shield-Wall"),
-    SPARTAN_WARRIOR(30, "Spartan Warrior"),
-    THE_IMMORTAL(100, "The Immortal"),
-    THE_300_LEGEND(300, "The 300 Legend")
-}
+       ┌──────────────────────────┬──────────────────────────┐
+       │ 7. Vanguard Pass Locked  │ 8. Applying In-Progress  │
+       │    vs. Unlocked State    │    vs. Completed State   │
+       └──────────────────────────┴──────────────────────────┘
 ```
 
 ---
 
-## 2. Persistence Contracts
+## 2. State Definitions & Behavioral Rules
 
-### 2.1. Room Database Entities
+### State 1: First-Time / New User
+* **Visuals**: Displays the Spartan Reveal onboarding flow (`SCR-002`) with interactive before/after transformation slider.
+* **Data State**: DataStore preference `has_completed_onboarding = false`.
+* **Action**: Primary CTA "START TRANSFORMATION" writes `true` to DataStore and seamlessly routes to Home (`SCR-003`).
 
-#### `ChallengeEntity`
-```kotlin
-@Entity(tableName = "challenges")
-data class ChallengeEntity(
-    @PrimaryKey val dayNumber: Int,
-    val title: String,
-    val quote: String,
-    val quoteAuthor: String,
-    val taskDescription: String,
-    val focusArea: String,
-    val isCompleted: Boolean,
-    val completedAtUtcMillis: Long?
-)
-```
+### State 2: Normal / Content Loaded
+* **Visuals**: Full high-contrast dark obsidian canvas with loaded 4K thumbnails, category chips, live countdown timer on Daily Drop, and active bottom navigation.
+* **Performance**: Thumbnails loaded via Coil with hardware bitmap decoding and disk caching.
 
-#### `WallpaperEntity`
-```kotlin
-@Entity(tableName = "wallpapers")
-data class WallpaperEntity(
-    @PrimaryKey val id: String,
-    val title: String,
-    val subtitle: String,
-    val category: String,
-    val assetPath: String,
-    val isPremium: Boolean,
-    val isFavorite: Boolean = false
-)
-```
+### State 3: Loading / Synchronizing
+* **Visuals**: Zero generic circular spinners. Screens use a **Chiseled Obsidian Shimmer** (subtle bronze/iron gradient sweep across card skeletons) that matches card dimensions exactly.
+* **Duration**: Bounded by a 2.5s network timeout before falling back to local Room cache.
 
-### 2.2. Jetpack DataStore Preferences Keys
-```kotlin
-object PreferencesKeys {
-    val IS_ONBOARDING_COMPLETED = booleanPreferencesKey("is_onboarding_completed")
-    val SELECTED_IDENTITY_PATH = stringPreferencesKey("selected_identity_path")
-    val NOTIFICATIONS_ENABLED = booleanPreferencesKey("notifications_enabled")
-    val NOTIFICATION_HOUR = intPreferencesKey("notification_hour") // Default 8
-    val NOTIFICATION_MINUTE = intPreferencesKey("notification_minute") // Default 0
-    val IS_VANGUARD_UNLOCKED = booleanPreferencesKey("is_vanguard_unlocked")
-    val LAST_STREAK_CHECK_DATE = stringPreferencesKey("last_streak_check_date")
-}
-```
+### State 4: Empty State
+* **Visuals**: Displayed when category filters or search queries return zero results.
+* **Artwork**: Centered weathered bronze Spartan helmet watermark with text: *"NO WEAPONS FOUND IN THIS ARSENAL"*.
+* **Action**: Single outline button: *"RESET ARSENAL FILTERS"*.
 
----
+### State 5: Offline Mode
+* **Visuals**: Persistent slim top notification strip: *"OFFLINE ARSENAL • ACCESSING LOCALLY STORED CANVASES"*.
+* **Data State**: Network disconnected; queries local Room cache for all previously downloaded 4K wallpapers and cached theme blueprints.
+* **Action**: User can still set cached wallpapers and pin Glance widgets. A *"RETRY BATTLE LINK"* chip triggers network re-check.
 
-## 3. UI State Machines & Contracts (UDF)
+### State 6: Error / Failure
+* **Visuals**: Chiseled obsidian alert card with crimson border (`#8A1C14`).
+* **Message**: Explicit explanation of what failed (e.g., *"GOOGLE PLAY BILLING TIMEOUT"* or *"STORAGE PERMISSION REQUIRED"*).
+* **Action**: Primary *"RETRY OPERATION"* button and secondary *"RETURN TO PHALANX"*.
 
-### 3.1. Home Screen UI State & Intents
-```kotlin
-data class HomeUiState(
-    val isLoading: Boolean = false,
-    val todayChallenge: DailyChallenge? = null,
-    val streakInfo: StreakInfo = StreakInfo(0, 0, 0, null, MilestoneTier.THE_FIRST_STAND, false),
-    val featuredWallpapers: List<Wallpaper> = emptyList(),
-    val errorMessage: String? = null
-)
+### State 7: Vanguard Locked vs. Unlocked
+* **Locked Visuals**: Golden padlock badge over card corner, blurred 4K preview watermark, and button reading *"UNLOCK VANGUARD PASS"*.
+* **Unlocked Visuals**: Padlock replaced by glowing bronze star badge; button reads *"APPLY THEME"* or *"DOWNLOAD 4K RAW"*.
 
-sealed interface HomeIntent {
-    data object Refresh : HomeIntent
-    data class CompleteTodayChallenge(val dayNumber: Int) : HomeIntent
-    data class SelectWallpaper(val wallpaperId: String) : HomeIntent
-    data object PinWidgetRequested : HomeIntent
-}
-
-sealed interface HomeEffect {
-    data class NavigateToPreview(val wallpaperId: String) : HomeEffect
-    data class ShowToast(val message: String) : HomeEffect
-    data object TriggerHeavyHaptic : HomeEffect
-}
-```
-
-### 3.2. Wallpaper Catalog UI State
-```kotlin
-data class WallpaperCatalogUiState(
-    val isLoading: Boolean = false,
-    val selectedCategory: WallpaperCategory = WallpaperCategory.ALL,
-    val wallpapers: List<Wallpaper> = emptyList(),
-    val isPremiumUser: Boolean = false
-)
-```
-
----
-
-## 4. Repository & UseCase Architecture
-
-### 4.1. Core Repositories
-- `ChallengeRepository`: Exposes `getTodayChallenge(): Flow<DailyChallenge>`, `completeChallenge(dayNumber: Int)`, `getChallengeHistory(): Flow<List<DailyChallenge>>`.
-- `StreakRepository`: Exposes `getStreakInfo(): Flow<StreakInfo>`, `recalculateStreak()`.
-- `WallpaperRepository`: Exposes `getWallpapers(category: WallpaperCategory): Flow<List<Wallpaper>>`, `getWallpaperById(id: String): Flow<Wallpaper?>`.
-- `UserPreferencesRepository`: Exposes onboarding status, notification preferences, and Vanguard entitlement.
-
-### 4.2. Core UseCases
-- `GetTodayChallengeUseCase`: Evaluates calendar day relative to start date and returns today's challenge.
-- `CompleteDailyChallengeUseCase`: Marks challenge complete in Room, invokes `RecalculateStreakUseCase`, and dispatches widget update event.
-- `ApplyWallpaperUseCase`: Downsamples bitmap to target display insets, calls `WallpaperManager.setBitmap()`, records analytics.
+### State 8: Applying In-Progress vs. Success
+* **In-Progress**: Bottom sheet modal (`SCR-010`) displaying active checklist steps with indeterminate bronze progress bar.
+* **Success**: Checklist items turn emerald-bronze with checkmarks, haptic confirmation fires, and master CTA *"VIEW MY NEW HOME SCREEN"* appears.
