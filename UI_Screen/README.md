@@ -1,42 +1,30 @@
-# 300 — UI Screen Artifacts (Phase 1 Baseline)
+# 300 — Luxury Minimalist UI Screens (Phase 1 Approved Redesign)
 
-This folder contains the high-fidelity UI screens and visual assets designed and generated in Stitch for the **300: Spartan Theme** Android app.
+This folder contains the completely redesigned, modern, ultra-premium UI screens for the **300** Android app.
 
-All screens follow the **Spartan Obsidian Design System**:
-* Canvas: True AMOLED Pitch Black (`#080809`)
-* Cards & Panels: Dark Obsidian (`#111215`) & Iron Slate (`#1B1D22`)
-* Primary Metallic: Spartan Weathered Bronze (`#C29B38`)
-* Secondary Accent: Spartan Crimson (`#8A1C14`)
-* Typography: Chiseled architectural uppercase serif display (*Cinzel* / *Oswald*) + high-legibility geometric sans (*Inter* / *Plus Jakarta Sans*)
+### Design System: Luxury Modern Minimalist
+* **Canvas**: Deep Pitch-Black AMOLED (`#0A0A0C`) with subtle warm ambient radial lighting (`#D8B26E` at 4% opacity).
+* **Surfaces**: Dark Smoky Obsidian (`#141418`) with soft 16dp–20dp rounded corners and subtle hairline borders (`rgba(255, 255, 255, 0.06)`).
+* **Primary Accent**: Satin Champagne Gold & Warm Bronze (`#D8B26E`) with smooth linear gradients.
+* **Secondary Jewel Accent**: Muted Spartan Crimson (`#9E2A2B`).
+* **Typography**: Ultra-clean modern sans-serif (*Plus Jakarta Sans* & *Inter*) with generous letter-spacing and breathing room.
+* **Philosophy**: Zero clutter, zero noisy gaming badges, quiet luxury, seamless 1-tap phone transformation.
 
 ---
 
-## Screen Inventory
+## Redesigned Screen Inventory
 
-| File Name | Screen ID & Canonical Name | UX Role & Purpose |
+| Screen | File Name | UX Role & Highlights |
 | :--- | :--- | :--- |
-| [`SCR-002_Onboarding_The_Spartan_Reveal.png`](SCR-002_Onboarding_The_Spartan_Reveal.png) | **SCR-002**: Onboarding (The Spartan Reveal) | Interactive before/after split-screen comparison demonstrating the transformation from stock Android to Spartan obsidian. |
-| [`SCR-003_Home_Dashboard_The_Phalanx.png`](SCR-003_Home_Dashboard_The_Phalanx.png) | **SCR-003**: Home Dashboard (The Phalanx) | Daily featured drop hero (*Thermopylae Obsidian*), category filter chips, 2-column theme grid, and docked 5-tab bottom navigation. |
-| [`SCR-004_Theme_Detail_Live_Preview.png`](SCR-004_Theme_Detail_Live_Preview.png) | **SCR-004**: Theme Detail & Live Preview | Interactive smartphone preview with Home/Lock toggles, AMOLED power metrics, component blueprint breakdown, and 1-tap apply CTA. |
-| [`SCR-005_Wallpaper_Vault.png`](SCR-005_Wallpaper_Vault.png) | **SCR-005**: Wallpaper Vault | 2-column 9:16 vertical gallery with badges (`PARALLAX 3D`, `AMOLED 99%`, `4K RAW`), filter chips, and stats ticker. |
-| [`SCR-006_Wallpaper_Fullscreen_Preview_Apply_Modal.png`](SCR-006_Wallpaper_Fullscreen_Preview_Apply_Modal.png) | **SCR-006**: Wallpaper Fullscreen Preview & Apply | Full-bleed 4K view, simulated UI overlay toggle (eye icon), 3D gyro parallax toggle, and slide-up 1-tap apply drawer. |
-| [`SCR-007_Spartan_Widgets_Forge.png`](SCR-007_Spartan_Widgets_Forge.png) | **SCR-007**: Spartan Widgets Forge | Showcase of 4 native Jetpack Glance widgets (Stoic Clock, Shield Battery Gauge, Maxim Ticker, War Calendar) with 1-tap home screen pinning. |
-| [`SCR-008_Vanguard_Pass_Paywall.png`](SCR-008_Vanguard_Pass_Paywall.png) | **SCR-008**: Vanguard Pass Paywall | High-converting lifetime tribute paywall (₹199 / $2.99 one-time payment), 6 core deliverables, Google Play trust badges. |
-| [`SCR-009_Spartan_Icon_Pack_Forge.png`](SCR-009_Spartan_Icon_Pack_Forge.png) | **SCR-009**: Icon Pack Forge & Styler | 400+ vector glyphs, live simulated phone dock preview, launcher compatibility chips, and palette switcher. |
-| [`SCR-010_Theme_Apply_Success_Celebration_Modal.png`](SCR-010_Theme_Apply_Success_Celebration_Modal.png) | **SCR-010**: 1-Tap Apply Success Modal | Real-time sequence feedback (Wallpaper set, Widget pinned, Icons ready), telemetry bar, exit to launcher CTA. |
-| [`SCR-011_Settings_Vault_Management.png`](SCR-011_Settings_Vault_Management.png) | **SCR-011**: Settings & Vault Management | AMOLED battery armor toggles, cache cleaner, Google Play restore, and Spartan manifesto. |
-
----
-
-## Supporting Artwork Assets
-
-| File Name | Description |
-| :--- | :--- |
-| [`ART_Spartan_Warrior_Hero_Silhouette.png`](ART_Spartan_Warrior_Hero_Silhouette.png) | Dramatic Spartan warrior silhouette with spear, hoplite shield, golden rim lighting, and embers on OLED black. |
-| [`ART_Spartan_Helmet_Corinthian_Profile.png`](ART_Spartan_Helmet_Corinthian_Profile.png) | Close-up profile of an ancient weathered bronze Corinthian helmet with horsehair crest emerging from pitch black. |
+| **01** | [`01_Splash_Brand_Genesis.png`](01_Splash_Brand_Genesis.png) | **Brand Genesis Splash**: Minimal geometric Spartan Lambda (Λ) monogram in warm champagne gold, clean '300' typography, and a razor-thin metallic loading bar. |
+| **02** | [`02_Onboarding_The_Reveal.png`](02_Onboarding_The_Reveal.png) | **The Reveal Onboarding**: Floating bezel-less phone mockup displaying the applied aesthetic, clean value proposition ("Your phone. Reimagined."), 3 feature bullets, and a silky smooth gradient CTA. |
+| **03** | [`03_Home_Curated_Themes.png`](03_Home_Curated_Themes.png) | **Home Dashboard**: Cinematic "Obsidian Dawn" theme-of-the-day hero card with 1-tap apply, clean category filter pills, 2-column curated theme archive, and floating dark glass navigation. |
+| **04** | [`04_Theme_Live_Preview_Apply.png`](04_Theme_Live_Preview_Apply.png) | **Theme Live Preview & 1-Tap Apply**: High-fidelity smartphone mockup with Home/Lock toggles, minimal AMOLED efficiency pills, 3 component breakdown cards, and a master champagne-bronze CTA. |
+| **05** | [`05_Studio_Widgets_Wallpapers.png`](05_Studio_Widgets_Wallpapers.png) | **Studio (Widgets & Wallpapers)**: Dual pill switcher between native Jetpack Glance widgets (Stoic Clock, Shield Battery Gauge, Maxim Ticker) with direct "+ Add to Home Screen" buttons, and 4K AMOLED wallpaper grid. |
+| **06** | [`06_Settings_Vanguard_Pass.png`](06_Settings_Vanguard_Pass.png) | **Settings & Vanguard Lifetime Pass**: Hero lifetime membership card (₹199 / $2.99 one-time payment, zero subscriptions) and grouped iOS/Nothing-style preference cards with smooth toggles. |
 
 ---
 
 ## Stitch Source References
 * **Stitch Project ID**: `14386677080154071069`
-* **Design System Asset**: `assets/3071428720144166618`
+* **Design System Asset**: `assets/1647928783357377156` (300 Luxury Modern Minimalist)
