@@ -1,27 +1,35 @@
-# 300 — Visual Design State & Stitch Registry (Luxury Modern Redesign)
+# 300 — Visual Design State & Stitch Registry (Classical Stoic Luxury Redesign)
 
-> **Document Version**: 3.0.0 (Luxury Modern Minimalist Baseline)  
+> **Document Version**: 4.0.0 (Classical Stoic Luxury Baseline)  
 > **Status**: APPROVED  
 > **Stitch Project ID**: `14386677080154071069`  
-> **Stitch Design System Asset ID**: `assets/1647928783357377156`
+> **Stitch Design System Asset ID**: `assets/13394188174485581719` ("300 Classical Stoic Luxury")  
+> **Stitch AI Engine**: `GEMINI_3_8_FLASH`
 
 ---
 
-## 1. Redesigned Visual Direction
-* **Philosophy**: Luxury Modern Minimalist (Nothing OS / Linear / Bang & Olufsen).
-* **Color Palette**: Deep pitch-black `#0A0A0C`, satin champagne gold `#D8B26E`, muted crimson `#9E2A2B`, and soft smoky obsidian cards `#141418`.
-* **Surfaces**: Spacious breathing room, 16dp–20dp rounded corners, subtle 1px hairlines (`rgba(255, 255, 255, 0.06)`), floating glass bottom navigation bar.
-* **Typography**: Clean modern sans (*Plus Jakarta Sans* / *Inter*).
+## 1. Classical Stoic Luxury Visual Direction
+* **Philosophy**: Classical Stoic Luxury meets modern minimalism (Nothing OS, Linear, Bang & Olufsen).
+* **Color Palette**: Pitch-black basalt `#08080A` & `#0B0B0C`, brushed antique satin gold `#C5A869` with specular gleam `#E2CA8F`, deep ceremonial spartan oxblood `#8A1C14`, and dark basalt stone surfaces `#121216`.
+* **Surfaces**: Sculpted 16dp–18dp rounded corners, subtle gold hairline borders (`rgba(197, 168, 105, 0.12)`), tranquil water reflection compositions, monumental ancient architectural porticos.
+* **Typography**: Classical luxury Roman serif (*EB Garamond* style) for headlines and brand titles; ultra-clean modern sans (*Plus Jakarta Sans*) for UI labels and body copy.
 
 ---
 
 ## 2. Redesigned Screen Registry in `UI_Screen/`
 
-| File Name in `UI_Screen/` | Screen | Stitch Screen ID | Description |
+| File Name in `UI_Screen/` | Screen | Stitch Screen ID | Description & High-Res Cloud Link |
 | :--- | :--- | :--- | :--- |
-| `01_Splash_Brand_Genesis.png` | **SCR-001** | `e3d427d64ec6462e908d1545336688bc` | Brand Genesis Splash: Minimal geometric Lambda (Λ) monogram, champagne glow, fine 1px loading bar. |
-| `02_Onboarding_The_Reveal.png` | **SCR-002** | `5ac59be843e34168b0eabbb99833d310` | The Reveal Onboarding: Floating bezel-less phone mockup, clean value prop, 3 feature rows, smooth gradient CTA. |
-| `03_Home_Curated_Themes.png` | **SCR-003** | `c08ebfb932b64f8cb6bf1c1209fbc60c` | Home Dashboard: Cinematic "Obsidian Dawn" theme hero with 1-tap apply, category pills, curated theme archive. |
-| `04_Theme_Live_Preview_Apply.png` | **SCR-004** | `80f50b5653794c54b2cdb3dbe720f8b4` | Theme Live Preview: Smartphone mockup with Home/Lock toggles, AMOLED power metrics, component cards, master CTA. |
-| `05_Studio_Widgets_Wallpapers.png` | **SCR-005** | `94c449da388041a786211215fe24d977` | Studio: Dual switcher for native Glance widgets (Clock, Shield Battery, Maxim Ticker) and 4K AMOLED wallpapers. |
-| `06_Settings_Vanguard_Pass.png` | **SCR-006** | `3b15df9333e24bca8d072572dd39a4e3` | Settings & Vanguard Pass: Lifetime membership card (₹199 / $2.99 one-time) and grouped iOS/Nothing-style preference cards. |
+| `01_Splash_Brand_Genesis.png` | **SCR-001** | `b39aa6f3fbe840a890a29ae154e856e2` | [Stitch Image](https://lh3.googleusercontent.com/aida/AEtjO1UiPE59Biz3csSdGn0HE3XvXsReG7qxiAm3zBeiQ-zVckJ1zJTTStPwARbFZNNr1aJpDyk9OWgn7NZsjyaiqVWqTK0_gzegVMX9_tnBil8Bio6a4sfrxK6CC5phkl2cSPf-kVk0zUMDBc_W5pZtjcMU1fsR1t0EV-WJ4wFqDKX-PitGykr-Je8KuwbkwzLb-QwY9ZfGwQzblBrVPdtyLX1UEr0ErDRZ2q19ev7FhNnvg5R6NQG9dDhPyjQZ) — Shield medallion with spear & Lambda monogram, gold serif typography, dual-tone loading bar. |
+| `02_Onboarding_The_Reveal.png` | **SCR-002** | `8a2e750b1c9d417c8165106b47d14a99` | [Stitch Image](https://lh3.googleusercontent.com/aida/AEtjO1VoZ_6OAF9SiQ2NcTs7Dy6f9jcrPiiozK_crIwKUPvswc8ayS_RElbMOuGPvKWW1bOkccHYpPja6l41a5REGoEwmi1DWbx-taoVd7G4y1He93oTLR4wIP9TxPET7xKgY6455toMqvAkq9CluCScRYnF9CMyiRytapWOTcPkfgrsAXYFz4_KhBiGRFkUhGfYUp34NIuxwpNAdhFodWnoDn_Ot4lzZK6hN7LJi_DXL_YBuMbQfdGzJr9wVAo1) — Floating flagship phone in stone arch sanctuary, "Make your phone feel intentional.", 3 gold wireframe chips, satin gold CTA. |
+| `03_Home_Curated_Themes.png` | **SCR-003** | `8ffdab0be6ff4641a69e99573b27ff81` | [Stitch Image](https://lh3.googleusercontent.com/aida/AEtjO1UkcyZXGnVa051oUjEcbUZSHApyiSVuLhoULUQ1W75dY0LmKJJsFcgLJ93g0-xEB10qw0oArptULlKWNOf0LsVm60uMV4ef1NkCQ6C9gww3lhc42Y0quyYr3FGhvUVlyRl0mKeVISZewPZudUuGySx8fgTFqoQcy2TJFv7SMqaa_lAOUwMqzs65g-LQ9wqvmbrH4Q2Z8vj1RA3vFcC6FWJqbJFQZX344wxPygHBAeqpL5n4GDJyHvLEpdii) — The Daily Set hero ("Obsidian Ritual"), category pills (Featured, AMOLED, Armor, Minimal), 2-column archive, docked 4-tab bar. |
+| `04_Theme_Live_Preview_Apply.png` | **SCR-004** | `1fedc67d269a457db11fc5db2bea3d2a` | [Stitch Image](https://lh3.googleusercontent.com/aida/AEtjO1XFk8H1Sk9CLKA-ldWERYuwig6xF8YEWd22b7hzxJskKqyy969n77yFf4AOF-nWiXCcQSff0ouzaAi_EG5XCBJ8BisEecvdkf2866-_bJMBOT-yxnINGJdDXmih4CeZZRX4fsjZWnD8B0HueOYekyltC1LjNRjyBIAnJiz8RKuutH3VuHqnNdYxgacD-Ycu87O4kag0cSbeNr3Hrej4E9YRzcVGmSlJvbQlonPJItaYfqepChmB8NcV3Yw) — Home/Lock toggle, phone mockup with live arched portal wallpaper + 09:41 clock + bronze glyphs, component list rows, 1-tap master CTA. |
+| `05_Studio_Widgets_Wallpapers.png` | **SCR-005** | `6251170fce5d4c118e011786d7682447` | [Stitch Image](https://lh3.googleusercontent.com/aida/AEtjO1Vz0bYyAb7OlULwT35P7WTHsqRK1dJWQRVpMCzcLyMN37xcQ6y6QAWA87WLX-f12EWrBcVDHolE5lXldquRh4nnbx5Eo71WBMavlSLMfqkvwsBmqE4LPFjd0IkwmK5qg-or2m7pFIjkQcE9MXjEDlUiHC4ewqCCaAXIYyTVTok6sIFklydyUfZ5h_DDmt9qvrdtkSPUcEdsHxYbAB-mGx5VTPI3JG5Pmck8eIcFH1F0aGgZXuhIQfl1cbcc) — Studio with laurel badge, Widgets/Wallpapers toggle, Monolith Clock (2x2), Shield Battery (2x2), 2-column wallpaper cards, active Studio tab. |
+| `06_Settings_Vanguard_Pass.png` | **SCR-006** | `5af911867fad49bbb5d9206a67da386d` | [Stitch Image](https://lh3.googleusercontent.com/aida/AEtjO1Vow4WNabpkH13Lx7D_axCS8U4UrL1bjEXmJrNla6_fu6sIawgJKhkl41gIh4jMfAzb7TYRce7ZAqESYo--L4h1DDPwFgGdSCKVyYiODIVj-9agR91GaMnoUvOa1GZCkn0QFu8HRX7awTrgyaxokyFyKaXvhCdBB55ITYZyW_Ak3vhiNbxQHFDvVAxVoq1la236TkiHPMt6FlR7zzMPLHPJSgQTiCbJafEB-JCDBNKfx0Lmg90393JmdD8_) — Vanguard Pass hero card (₹199 one-time lifetime unlock, zero subscriptions), Display card (Pure black canvas), Library card, active Settings tab. |
+
+---
+
+## 3. Reference Retention
+- The user's input reference images (`01_Splash_Brand_Genesis_v2.png` through `06_Settings_Vanguard_Pass_v2.png`) are preserved as benchmark ground-truth references.
+- The new production files (`01_Splash_Brand_Genesis.png` through `06_Settings_Vanguard_Pass.png`) directly replace the older design files with the GEMINI_3_8_FLASH Stitch outputs.
+

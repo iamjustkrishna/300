@@ -1,22 +1,23 @@
-# 300 — Screen Specification Inventory (Luxury Modern Redesign)
+# 300 — Screen Specification Inventory (Classical Stoic Luxury Redesign)
 
-> **Document Version**: 3.0.0 (Luxury Minimalist Baseline)  
+> **Document Version**: 4.0.0 (Classical Stoic Luxury Baseline)  
 > **Status**: APPROVED  
 > **Stitch Project ID**: `14386677080154071069`  
-> **Stitch Design System**: `assets/1647928783357377156` (300 Luxury Modern Minimalist)
+> **Stitch Design System**: `assets/13394188174485581719` ("300 Classical Stoic Luxury")  
+> **Stitch Model**: `GEMINI_3_8_FLASH`
 
 ---
 
 ## 1. Streamlined Screen Inventory (6-Screen Core Suite)
 
-| Screen ID | File Name in `UI_Screen/` | Canonical Screen Name | Stitch Screen Reference |
-| :--- | :--- | :--- | :--- |
-| `SCR-001` | [`01_Splash_Brand_Genesis.png`](01_Splash_Brand_Genesis.png) | Splash (Brand Genesis) | `e3d427d64ec6462e908d1545336688bc` |
-| `SCR-002` | [`02_Onboarding_The_Reveal.png`](02_Onboarding_The_Reveal.png) | Onboarding (The Reveal) | `5ac59be843e34168b0eabbb99833d310` |
-| `SCR-003` | [`03_Home_Curated_Themes.png`](03_Home_Curated_Themes.png) | Home Dashboard (Curated Themes) | `c08ebfb932b64f8cb6bf1c1209fbc60c` |
-| `SCR-004` | [`04_Theme_Live_Preview_Apply.png`](04_Theme_Live_Preview_Apply.png) | Theme Live Preview & 1-Tap Apply | `80f50b5653794c54b2cdb3dbe720f8b4` |
-| `SCR-005` | [`05_Studio_Widgets_Wallpapers.png`](05_Studio_Widgets_Wallpapers.png) | Studio (Widgets & Wallpapers) | `94c449da388041a786211215fe24d977` |
-| `SCR-006` | [`06_Settings_Vanguard_Pass.png`](06_Settings_Vanguard_Pass.png) | Settings & Vanguard Lifetime Pass | `3b15df9333e24bca8d072572dd39a4e3` |
+| Screen ID | File Name in `UI_Screen/` | Canonical Screen Name | Stitch Screen ID | High-Res Cloud Preview |
+| :--- | :--- | :--- | :--- | :--- |
+| `SCR-001` | [`01_Splash_Brand_Genesis.png`](../../UI_Screen/01_Splash_Brand_Genesis.png) | Splash (Brand Genesis) | `b39aa6f3fbe840a890a29ae154e856e2` | [Stitch Image](https://lh3.googleusercontent.com/aida/AEtjO1UiPE59Biz3csSdGn0HE3XvXsReG7qxiAm3zBeiQ-zVckJ1zJTTStPwARbFZNNr1aJpDyk9OWgn7NZsjyaiqVWqTK0_gzegVMX9_tnBil8Bio6a4sfrxK6CC5phkl2cSPf-kVk0zUMDBc_W5pZtjcMU1fsR1t0EV-WJ4wFqDKX-PitGykr-Je8KuwbkwzLb-QwY9ZfGwQzblBrVPdtyLX1UEr0ErDRZ2q19ev7FhNnvg5R6NQG9dDhPyjQZ) |
+| `SCR-002` | [`02_Onboarding_The_Reveal.png`](../../UI_Screen/02_Onboarding_The_Reveal.png) | Onboarding (The Reveal) | `8a2e750b1c9d417c8165106b47d14a99` | [Stitch Image](https://lh3.googleusercontent.com/aida/AEtjO1VoZ_6OAF9SiQ2NcTs7Dy6f9jcrPiiozK_crIwKUPvswc8ayS_RElbMOuGPvKWW1bOkccHYpPja6l41a5REGoEwmi1DWbx-taoVd7G4y1He93oTLR4wIP9TxPET7xKgY6455toMqvAkq9CluCScRYnF9CMyiRytapWOTcPkfgrsAXYFz4_KhBiGRFkUhGfYUp34NIuxwpNAdhFodWnoDn_Ot4lzZK6hN7LJi_DXL_YBuMbQfdGzJr9wVAo1) |
+| `SCR-003` | [`03_Home_Curated_Themes.png`](../../UI_Screen/03_Home_Curated_Themes.png) | Home Dashboard (Curated Themes) | `8ffdab0be6ff4641a69e99573b27ff81` | [Stitch Image](https://lh3.googleusercontent.com/aida/AEtjO1UkcyZXGnVa051oUjEcbUZSHApyiSVuLhoULUQ1W75dY0LmKJJsFcgLJ93g0-xEB10qw0oArptULlKWNOf0LsVm60uMV4ef1NkCQ6C9gww3lhc42Y0quyYr3FGhvUVlyRl0mKeVISZewPZudUuGySx8fgTFqoQcy2TJFv7SMqaa_lAOUwMqzs65g-LQ9wqvmbrH4Q2Z8vj1RA3vFcC6FWJqbJFQZX344wxPygHBAeqpL5n4GDJyHvLEpdii) |
+| `SCR-004` | [`04_Theme_Live_Preview_Apply.png`](../../UI_Screen/04_Theme_Live_Preview_Apply.png) | Theme Live Preview & 1-Tap Apply | `1fedc67d269a457db11fc5db2bea3d2a` | [Stitch Image](https://lh3.googleusercontent.com/aida/AEtjO1XFk8H1Sk9CLKA-ldWERYuwig6xF8YEWd22b7hzxJskKqyy969n77yFf4AOF-nWiXCcQSff0ouzaAi_EG5XCBJ8BisEecvdkf2866-_bJMBOT-yxnINGJdDXmih4CeZZRX4fsjZWnD8B0HueOYekyltC1LjNRjyBIAnJiz8RKuutH3VuHqnNdYxgacD-Ycu87O4kag0cSbeNr3Hrej4E9YRzcVGmSlJvbQlonPJItaYfqepChmB8NcV3Yw) |
+| `SCR-005` | [`05_Studio_Widgets_Wallpapers.png`](../../UI_Screen/05_Studio_Widgets_Wallpapers.png) | Studio (Widgets & Wallpapers) | `6251170fce5d4c118e011786d7682447` | [Stitch Image](https://lh3.googleusercontent.com/aida/AEtjO1Vz0bYyAb7OlULwT35P7WTHsqRK1dJWQRVpMCzcLyMN37xcQ6y6QAWA87WLX-f12EWrBcVDHolE5lXldquRh4nnbx5Eo71WBMavlSLMfqkvwsBmqE4LPFjd0IkwmK5qg-or2m7pFIjkQcE9MXjEDlUiHC4ewqCCaAXIYyTVTok6sIFklydyUfZ5h_DDmt9qvrdtkSPUcEdsHxYbAB-mGx5VTPI3JG5Pmck8eIcFH1F0aGgZXuhIQfl1cbcc) |
+| `SCR-006` | [`06_Settings_Vanguard_Pass.png`](../../UI_Screen/06_Settings_Vanguard_Pass.png) | Settings & Vanguard Lifetime Pass | `5af911867fad49bbb5d9206a67da386d` | [Stitch Image](https://lh3.googleusercontent.com/aida/AEtjO1Vow4WNabpkH13Lx7D_axCS8U4UrL1bjEXmJrNla6_fu6sIawgJKhkl41gIh4jMfAzb7TYRce7ZAqESYo--L4h1DDPwFgGdSCKVyYiODIVj-9agR91GaMnoUvOa1GZCkn0QFu8HRX7awTrgyaxokyFyKaXvhCdBB55ITYZyW_Ak3vhiNbxQHFDvVAxVoq1la236TkiHPMt6FlR7zzMPLHPJSgQTiCbJafEB-JCDBNKfx0Lmg90393JmdD8_) |
 
 ---
 
@@ -25,76 +26,92 @@
 ### SCR-001: Splash (Brand Genesis)
 * **ID**: `SCR-001`
 * **File**: `UI_Screen/01_Splash_Brand_Genesis.png`
-* **Purpose**: Instant, elegant brand introduction with cache initialization within 800ms.
-* **Aesthetic**: Deep pitch-black background (`#0A0A0C`) with a soft warm ambient radial glow (`#D8B26E` at 4% opacity).
-* **Components**: Centered geometric Spartan Lambda (Λ) monogram in satin champagne-bronze, clean modern '300' typography (*Plus Jakarta Sans*), subtitle "Transform your phone", and a razor-thin 1px metallic loading bar.
+* **Purpose**: Ceremonial brand ritual and initial cache warm-up (< 800ms).
+* **Aesthetic**: Deep basalt stone canvas (`#08080A`), dark ambient lighting, drifting ember particles.
+* **Components**:
+  - Circular antique bronze hoplite shield medallion with vertical spear piercing and embossed Spartan $\Lambda$ (Lambda) chevron.
+  - Centered commanding `300` in classical luxury serif (*EB Garamond* style).
+  - Spaced `SPARTA THEME` with fine gold hairline divider.
+  - Stoic micro-motto *"RETURN WITH YOUR SHIELD, OR ON IT."*
+  - Dual-tone progress bar (brushed satin gold to dark bronze) with tracking-widest micro-caption `PREPARING YOUR SET · V1.0 × PHALANX`.
 
 ---
 
 ### SCR-002: Onboarding (The Reveal)
 * **ID**: `SCR-002`
 * **File**: `UI_Screen/02_Onboarding_The_Reveal.png`
-* **Purpose**: Clearly demonstrate the value proposition: transforming the user's phone in a single tap.
+* **Purpose**: Make the transformation concrete before user entry.
 * **Components**: 
-  - Top minimal Lambda mark.
-  - Floating bezel-less smartphone mockup showing applied dark aesthetic, clock widget, and 4 satin bronze dock glyphs.
-  - Headline: *"Your phone. Reimagined."*
-  - Subtitle: *"Curated 4K AMOLED themes, native widgets, and bespoke icons in a single tap."*
-  - 3 clean feature rows (True AMOLED, Native Glance Widgets, One-Tap Cohesion).
-  - Primary CTA: Smooth satin champagne-bronze gradient button *"Get Started →"*.
+  - Centered top pill badge: `300 · SPARTA`.
+  - Floating flagship smartphone in an ancient monumental stone portico with archways, tranquil reflective water pool, and glowing flame brazier.
+  - Phone screen interior: minimal lock screen (*"Mon, Apr 28 · A CALMER BRIGHTER YOU"*), minimal weather, search pill, and 4 bronze glyph dock icons.
+  - Classical serif headline: *"Make your phone feel intentional."*
+  - Subtitle: *"Themes, widgets, and icons — curated as one set."*
+  - 3 Circular wireframe gold chips:
+    1. `True black` (crescent moon)
+    2. `Native widgets` (4-square grid)
+    3. `One-tap sets` (layered stack)
+  - Primary CTA: Brushed satin-gold pill button *"Start exploring →"*.
+  - Micro-footer: `100% NATIVE ANDROID · ZERO ADS`.
 
 ---
 
 ### SCR-003: Home Dashboard (Curated Themes)
 * **ID**: `SCR-003`
 * **File**: `UI_Screen/03_Home_Curated_Themes.png`
-* **Purpose**: Main discovery feed for curated complete themes and the Daily Drop.
+* **Purpose**: Editorial daily theme discovery and curated theme archive.
 * **Components**:
-  - Top bar with subtle Lambda mark, search icon, and Vanguard pass status pill.
-  - Hero Card: *"Obsidian Dawn — Theme of the Day"*, cinematic 4K artwork with silky gradient scrim and floating *"1-Tap Apply"* button.
-  - Horizontal filter rail (*Featured, True AMOLED, Minimal, Armor, Creed*).
-  - Curated 2-column theme archive (*Ares Dark, Leonidas Dawn, Phalanx Noir, Stoic Creed*).
-  - Floating dark glass bottom navigation bar.
+  - Top bar with Spartan Lambda gold badge, `300 CURATED THEMES`, search glass pill, and profile indicator.
+  - Hero Card: *"Obsidian Ritual — THE DAILY SET"*, depicting a monumental stone colonnade with flame braziers and antique bronze hoplite shield. Includes `Preview theme >` button and `99.2% Black · 4K UHD` badge.
+  - Category Filter Rail: Horizontal pill switcher: `Featured` (active solid gold), `AMOLED`, `Armor`, `Minimal`.
+  - Curated Archive: 2-column masonry grid cards:
+    1. *Spartan Dawn* ("Light finds a way.")
+    2. *Helm* ("Silence looks stronger.")
+    3. *Aegean Noir* ("Depth over noise.")
+    4. *Last Light* ("Stillness remains.")
+  - Stoic Philosophy banner: *"DISCIPLINE IS FREEDOM · CURATED SPARTAN ECOSYSTEM · ZERO BLOATWARE"*.
+  - Docked 4-tab navigation bar: `Discover` (active), `Studio`, `Vault`, `Settings`.
 
 ---
 
 ### SCR-004: Theme Live Preview & 1-Tap Apply
 * **ID**: `SCR-004`
 * **File**: `UI_Screen/04_Theme_Live_Preview_Apply.png`
-* **Purpose**: Realistic interactive smartphone preview allowing the user to inspect the full transformation before applying.
+* **Purpose**: Interactive inspection flow displaying the complete applied theme before 1-tap activation.
 * **Components**:
-  - Top bar with back button, theme title, favorite heart, and share icons.
-  - Segmented control toggling between *"Home Screen"* and *"Lock Screen"*.
-  - Smartphone preview mockup showing wallpaper, Glance clock, and dock icons.
-  - Minimal technical specs pills (*99.4% True Black, Native Glance, Zero Battery Waste*).
-  - 3 component cards (*Wallpaper, Widget, Icons*).
-  - Floating bottom bar with dominant master CTA: *"Apply Complete Theme (1-Tap)"*.
+  - Top bar with back chevron `<`, title `Obsidian Ritual (CURATED THEME · 088)`, and favorite heart.
+  - Segmented Mode Switcher: `Home screen` (active brushed gold) vs `Lock screen` (dark basalt).
+  - Center Hero Smartphone Mockup: Shows the exact live theme with basalt portal wallpaper, minimal clock widget (`09:41 · Tue, Apr 22`), and dock of 5 bronze glyph icons.
+  - Feature Badges: `TRUE BLACK`, `NATIVE WIDGET`, `BRASS GLYPHS`.
+  - Component List: Live inspectable rows for Wallpaper, Clock widget, and Icon pack with chevrons.
+  - Master CTA: Large brushed satin-gold pill button: `Apply this set →` with micro-caption `1-TAP ANDROID SYSTEM APPLIER · ZERO ROOT REQUIRED`.
 
 ---
 
 ### SCR-005: Studio (Widgets & Wallpapers)
 * **ID**: `SCR-005`
 * **File**: `UI_Screen/05_Studio_Widgets_Wallpapers.png`
-* **Purpose**: Modular customization hub for standalone native Glance widgets and 4K AMOLED wallpapers.
+* **Purpose**: Native Jetpack Glance widget customization and standalone 4K AMOLED wallpaper gallery.
 * **Components**:
-  - Dual pill switcher between *"Widgets"* and *"Wallpapers"*.
-  - Native Glance Widget cards:
-    1. *Stoic Monolith Clock (2x2)* with direct *"+ Add to Home Screen"* button.
-    2. *Shield Battery Gauge (2x2)* with perimeter battery ring.
-    3. *War Maxim Ticker (4x1)* with stoic quotes.
-  - Curated 4K Canvases teaser grid (*The Iron King, Phalanx Shield*).
-  - Floating bottom navigation bar.
+  - Header: Classical serif `Studio / SHAPES A CALMER TOMORROW` with gold laurel badge `300 SET ACTIVE`.
+  - Dual pill category switcher: `Widgets` (active) vs `Wallpapers`.
+  - Featured Widget Forge Cards:
+    1. *Monolith Clock (2x2)*: Obsidian marble widget with Roman numerals (`XII`, `III`, `VI`, `IX`), analog hands, digital readout, stoic quote *"Time keeps better company here."*, and `+ Add to home` gold button.
+    2. *Shield Battery (2x2)*: Sculpted bronze hoplite shield with Lambda, 78% battery readout, crimson power arc, quote *"Power fuels a quieter path."*, and `+ Add to home` gold button.
+  - Wallpaper Sets: 2-column grid featuring *Obsidian Sanctuary* and *Crimson Silence* (Vanguard Pass exclusive with lock badge).
+  - Docked 4-tab bar: `Discover`, `Studio` (active Doric temple glowing gold), `Vault`, `Settings`.
 
 ---
 
 ### SCR-006: Settings & Vanguard Lifetime Pass
 * **ID**: `SCR-006`
 * **File**: `UI_Screen/06_Settings_Vanguard_Pass.png`
-* **Purpose**: Lifetime membership upgrade and system settings.
+* **Purpose**: Transparent lifetime membership upgrade and core app preferences.
 * **Components**:
-  - Vanguard Pass Hero Card: Satin champagne gradient border, gold shield emblem, *"₹199 ($2.99) One-Time • Zero Subscriptions"*, and *"Claim Lifetime Access (₹199)"* button.
-  - Grouped preference cards:
-    * *Display & Power*: True AMOLED Pure Black toggle, Gyroscope 3D Parallax toggle, Battery Armor Mode toggle.
-    * *System & Widgets*: Native Glance 15-min sync, Hoplite Haptics toggle.
-    * *Storage & Honor*: Offline Wallpaper Cache manager (24.6 MB used with "Clear" button), Restore Google Play Purchases, The Spartan Manifesto.
-  - Floating bottom navigation bar.
+  - Top bar: `Settings` in classical serif with `v1.0.0` metallic badge.
+  - Vanguard Pass Hero Card: High-contrast basalt card featuring the ancient weathered bronze Corinthian helmet with crimson crest, laurel wreath badge `LIFETIME ACCESS`, title `Vanguard Pass`, subtitle *"A complete collection. Yours for life."*, price `₹199 one-time` (zero recurring subscriptions), and `Unlock the full vault >` CTA button.
+  - Display Section: Pure black canvas (gold switch ON) and Low-power mode (switch OFF).
+  - Library Section: Offline cache, Restore purchases, and About 300 rows.
+  - Stoic footer: *"Discipline in every detail. Zero bloatware."*
+  - Docked 4-tab bar: `Discover`, `Studio`, `Vault`, `Settings` (active gear glowing gold).
+
