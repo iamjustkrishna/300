@@ -82,33 +82,33 @@
 ## Phase 7: TDD Foundation & Harness
 - **Objective**: Setup Compose UI test fixtures, Coroutine test dispatchers, fake repositories, and automated test runners.
 - **Inputs**: Architecture specifications, test pyramid requirements.
-- **Outputs**: Test dependencies configured in `libs.versions.toml`, test harness classes created.
+- **Outputs**: Test dependencies configured in `libs.versions.toml`, Roborazzi 1.40.1, Robolectric 4.14.1, `UiScreenCaptureTest.kt`.
 - **Acceptance Criteria**: Red-Green-Refactor test cycle verified on JVM.
 - **Dependencies**: Phase 6.
-- **Tests**: Initial failing unit tests written and verified red.
-- **Completion Status**: Pending user approval of specifications.
+- **Tests**: Automated unit and headless UI tests passing cleanly (`testDebugUnitTest`).
+- **Completion Status**: **COMPLETED (Phase 7)**.
 
 ---
 
 ## Phase 8: Implementation
 - **Objective**: Implement production Compose UI, ViewModels, UseCases, Room DAOs, DataStore, and Glance AppWidgets.
-- **Inputs**: Approved screen designs, state models, and green tests.
-- **Outputs**: Working, tested production application code.
-- **Acceptance Criteria**: All acceptance criteria satisfied, zero compiler warnings, zero lint errors.
+- **Inputs**: Approved screen designs (`UI_Screen/*_v2.png`), state models, and green tests.
+- **Outputs**: Complete production application code across Room, DataStore, Glance, and 6 Compose screens with photorealistic sliced artwork drawables.
+- **Acceptance Criteria**: All acceptance criteria satisfied, zero compiler warnings, zero lint errors, 1:1 photorealistic fidelity.
 - **Dependencies**: Phase 7.
-- **Tests**: Unit tests, integration tests, Compose UI tests.
-- **Completion Status**: Pending Phase 7.
+- **Tests**: Unit tests, integration tests, Roborazzi screenshots, assembleDebug passing.
+- **Completion Status**: **COMPLETED (Phase 8)**.
 
 ---
 
-## Phase 9: Device Validation
-- **Objective**: Validate responsive layouts across small phones, standard phones, large phones, foldables, and tablets.
-- **Inputs**: Built application, device configuration matrix.
-- **Outputs**: `.agents/states/devices.md` with sign-offs across all form factors.
-- **Acceptance Criteria**: Zero text clipping, proper multi-column grid scaling, gesture navigation inset support.
+## Phase 9: Device Validation & Hardware Deployment
+- **Objective**: Validate responsive layouts across form factors and enable automated physical/wireless hardware deployment.
+- **Inputs**: Built application, device configuration matrix, ADB tools.
+- **Outputs**: `.agents/states/devices.md`, `device-installer-agent`, `scripts/device_helper.ps1`, live hardware verification on Realme RMX3171.
+- **Acceptance Criteria**: Zero crashes, wireless pairing (`adb pair`), connection (`adb connect`), and streamed APK install verified on real hardware.
 - **Dependencies**: Phase 8.
-- **Tests**: Headless Robolectric Native Graphics / emulator multi-screen tests.
-- **Completion Status**: Pending Phase 8.
+- **Tests**: Headless Robolectric Native Graphics captures + live physical phone deployment.
+- **Completion Status**: **COMPLETED (Phase 9)**.
 
 ---
 

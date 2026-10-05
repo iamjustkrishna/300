@@ -10,49 +10,80 @@
 ---
 
 ## 2. Current Phase & Milestone
-- **Current Phase**: **Phase 1 Complete (Ready for Phase 2 Hand-Off)**
-- **Current Milestone**: `M1-RESEARCH-AND-DESIGN` (Product Research, MVP Definition, Complete UI Design in Stitch)
-- **Next Milestone**: `M2-ARCHITECTURE` (Data Contracts, Clean Architecture, Jetpack Glance Scaffolding, TDD Baseline)
+- **Current Phase**: **Phase 3 Active (M3 Asset Catalog, Widgets & Store Assets)**
+- **Current Milestone**: `M2-ARCHITECTURE` (Clean Architecture, Jetpack Glance Scaffolding, Room, DataStore, 6 Screens, TDD Baseline Verified)
+- **Next Milestone**: `M3-POLISH-AND-STORE-ASSETS` (Asset pipeline polish, Play Store packaging)
 
 ---
 
 ## 3. Work Status Breakdown
 
 ### What is Completed?
-- [x] Analyzed all reference images and user-provided `*_v2.png` benchmarks in `UI_Screen/` folder (extracted classical stoic luxury, stone porticos, antique weathered bronze, Roman serifs, and minimal Android hierarchy).
-- [x] Created "300 Classical Stoic Luxury" design system in Stitch (`assets/13394188174485581719`) using best model `GEMINI_3_8_FLASH`.
-- [x] Generated all 6 production UI screens in Stitch and downloaded high-resolution renders into `UI_Screen/`:
-  1. `01_Splash_Brand_Genesis.png` (`b39aa6f3fbe840a890a29ae154e856e2`)
-  2. `02_Onboarding_The_Reveal.png` (`8a2e750b1c9d417c8165106b47d14a99`)
-  3. `03_Home_Curated_Themes.png` (`8ffdab0be6ff4641a69e99573b27ff81`)
-  4. `04_Theme_Live_Preview_Apply.png` (`1fedc67d269a457db11fc5db2bea3d2a`)
-  5. `05_Studio_Widgets_Wallpapers.png` (`6251170fce5d4c118e011786d7682447`)
-  6. `06_Settings_Vanguard_Pass.png` (`5af911867fad49bbb5d9206a67da386d`)
-- [x] Generated the **v3 UI Suite** in `UI_Screen/v3/` using Stitch `GEMINI_3_8_FLASH`, fusing `UI_Screen/` minimal luxury with `inspiration/` authentic battle-forged Spartan iconography (Corinthian helmet, hoplite shield meander bevels, thrusting spear, drifting embers):
-  1. `01_Splash_Brand_Genesis_v3.png` (`623cddd3b8b444c29f89b19a8b2a06c9`)
-  2. `02_Onboarding_The_Reveal_v3.png` (`c643e2536a954f69b54d8c0efef4f43d`)
-  3. `03_Home_Curated_Themes_v3.png` (`5351f669ad144001bb0b2f60c7fafac3`)
-  4. `04_Theme_Live_Preview_Apply_v3.png` (`ccf6e928e4a74fa28467e085afa6c235`)
-  5. `05_Studio_Widgets_Wallpapers_v3.png` (`33e8f355b90e40cf98334a8eb5df9d53`)
-  6. `06_Settings_Vanguard_Pass_v3.png` (`17d924506c62425e8b01abd524643053`)
-- [x] Preserved user's ground-truth `*_v2.png` reference files in `UI_Screen/`.
-- [x] Updated all project specs (`specs/screen-spec.md`, `specs/design-system.md`, `states/design.md`, `states/current.md`, `UI_Screen/README.md`, `UI_Screen/v3/README.md`).
-- [x] Respected hard boundary: **Zero production Kotlin or Android architecture code was written in Phase 1.**
+- [x] **Room Database & Offline-First Architecture**:
+  - `ThemeEntity`, `WallpaperEntity`, `ThemeDao`, `WallpaperDao`, `ThreeHundredDatabase` singleton.
+  - Automatic seed injection on first run with 6 launch themes and wallpapers.
+- [x] **Jetpack DataStore Preferences**:
+  - `VanguardPreferences` tracking onboarding state, Vanguard lifetime unlock, pure black OLED, and low power mode.
+- [x] **100% Native Jetpack Glance Home Widgets**:
+  - `MonolithClockWidget` (2x2) with Roman numerals dial and stoic creed.
+  - `ShieldBatteryWidget` (2x2) with hoplite shield and crimson power arc.
+  - 1-tap `GlancePinningHelper` using `AppWidgetManager.requestPinAppWidget`.
+  - AppWidget XML metadata and receiver declarations in `AndroidManifest.xml`.
+- [x] **Native Wallpaper Manager**:
+  - `WallpaperApplier` enabling 1-tap wallpaper setting for Home, Lock, or Both screens.
+- [x] **Full 6-Screen Suite Implemented (Exact 1:1 match of `UI_Screen/*_v2.png`)**:
+  - `SCR-001` **Splash**: Bronze hoplite shield medallion, spear, classical serif "300", and auto-progress.
+  - `SCR-002` **Onboarding**: Stone portico archway phone mockup, 3 wireframe chips, brushed gold CTA.
+  - `SCR-003` **Home Dashboard**: "THE DAILY SET · 088" Obsidian Ritual hero, category rail, 2-column archive cards.
+  - `SCR-004` **Theme Live Preview**: Home/Lock segmented switcher, live inspectable mockup, component rows, 1-tap apply.
+  - `SCR-005` **Studio**: Widget forge cards with 1-tap "+ Add to home" pinning, AMOLED wallpapers grid.
+  - `SCR-006` **Settings**: Vanguard Pass hero card (₹199 one-time lifetime unlock), AMOLED pure black switches.
+- [x] **Navigation & Entry Point**:
+  - `SpartanBottomNavBar` 4-tab docked navigation bar.
+  - `AppNavHost` with backstack handling, animated transitions, and route definitions.
+  - `MainActivity` edge-to-edge Compose host.
+- [x] **Verification & TDD**:
+  - Unit tests passed (`.\gradlew testDebugUnitTest`: BUILD SUCCESSFUL).
+  - Debug APK built and assembled (`.\gradlew assembleDebug`: BUILD SUCCESSFUL in 48s).
+  - Headless UI Screen capture executed with Roborazzi + Robolectric Native Graphics (`.\gradlew testDebugUnitTest --tests "*UiScreenCaptureTest*"`: BUILD SUCCESSFUL).
+  - All 6 production screens upgraded to **100% exact 1:1 photorealistic match** of `UI_Screen/*_v2.png` (using sliced high-resolution artwork drawables in `res/drawable/` instead of procedural canvas placeholders) and captured in [`UI_Screen/actual_shots_from_ui/`](../../UI_Screen/actual_shots_from_ui).
+- [x] **Hardware & Device Deployment**:
+  - `device-installer-agent` defined and registered via `define_subagent` and documented in `.agents/agents/device-installer-agent.md`.
+  - Repeatable workflow documented in `.agents/workflows/device-install.md`.
+  - PowerShell automation engine `scripts/device_helper.ps1` supporting USB discovery, Wi-Fi discovery, Android 11+ wireless pairing (`adb pair`), connection (`adb connect`), and one-tap install + launch (`adb install -r` & `am start`).
+  - **Live Device Verified**: Successfully connected to Realme RMX2151 (`192.168.31.163:41341`), installed [`app-debug.apk`](../../app/build/outputs/apk/debug/app-debug.apk), and launched [`MainActivity`](../../app/src/main/java/space/iamjustkrishna/threehundred/MainActivity.kt) with zero crashes.
+  - Verified navigation flows and captured real-device screenshots on physical hardware across Onboarding, Discover Home, and Settings.
+- [x] **Brand Logo & Adaptive Launcher Icon Pipeline**:
+  - Generated iconic Spartan bronze Tri-Blade Lambda ($\Lambda$) logo on pitch obsidian canvas.
+  - Exported to all Android launcher icon densities: `mipmap-mdpi`, `mipmap-hdpi`, `mipmap-xhdpi`, `mipmap-xxhdpi`, `mipmap-xxxhdpi` (both standard square & anti-aliased circular variants).
+  - Configured Android adaptive icons (`mipmap-anydpi/ic_launcher.xml` and `ic_launcher_round.xml`) with pure obsidian `#080809` background vector and safe-zone centered bronze emblem.
+  - Added high-res `brand_logo_300.webp` into in-app Settings screen footer and interactive "About 300" dialog.
 
 ### What is Being Worked On?
-- Final user review and sign-off on the Classical Stoic Luxury UI screens (v2 & v3 suites).
+- Phase 3 catalog delivery: six additional original wallpaper masters, individual icon exports, catalog/download UI, and Play Store creative.
 
-### What is Blocked?
-- **NO BLOCKERS**. All 6 screens are fully generated, downloaded, and verified.
+### Asset Pipeline Progress
+- [x] First reusable artwork batch exported to optimized WebP in `app/src/main/res/drawable-nodpi/`.
+- [x] Splash, onboarding, theme preview, Vanguard Pass, widget, and wallpaper artwork wired to WebP resources.
+- [x] Remaining theme cards and Obsidian Sanctuary studio preview converted to WebP.
+- [x] Six original text-free 1440x3200 wallpaper masters approved outside APK in `assets/wallpapers/masters/` + `manifest.json` (95%+ true-black, ADR-013, TDD green).
+- [x] Added tested aspect-ratio-aware wallpaper crop math with clamped user offsets as the foundation for the scrollable crop editor.
+- [x] All 12 original 1440x3200 WebP masters generated, calibrated with AMOLED black-floor rolloff (>=95% true-black, 100% top 320px status bar safe zone), and verified with `AssetCatalogVerificationTest` & `WallpaperMastersVerificationTest`.
+- [x] 12 lean in-APK card drawables generated in `drawable-nodpi/` (3.51MB total APK asset footprint, well below 6MB budget).
+- [x] `SCR-007: Wallpaper Vault` implemented (`VaultScreen.kt`), wired into `AppNavHost` and `SpartanBottomNavBar` across all screens, and verified live on hardware and via Roborazzi capture (`07_Vault_Masterworks_Wallpapers.png`).
+- [x] Four native Glance widgets registered and pin-capable: Monolith Clock, Shield Battery, Creed Ticker, War Calendar.
+- [x] Six-family/96-glyph export-only icon catalog inventory plus original vector master-board starter saved under `assets/icons/`.
+- [x] Generate deterministic original SVG exports for all 96 icon glyphs and expose them through the Icon Forge catalog.
+- [ ] Complete visual illustration QA and launcher/share export actions for all 96 glyphs.
+- [x] Added a scrollable/searchable Icon Forge catalog screen for all 96 manifest entries and routed it from Studio.
+- [x] Added glyph detail modal with launcher-dependent export/import disclosure.
+- [x] Added explicit billing gateway and entitlement repository boundaries; unconfigured billing fails closed until Play Billing is wired.
+- [x] Release minification verified and release AAB generated; signing currently uses the local Gradle release signing configuration.
+- [ ] Complete Play Store listing visual packaging and release pack distribution.
 
 ### What Comes Next?
-- User review and approval of Phase 1 deliverables.
-- Transition to **Phase 2**:
-  1. Technical architecture & package structure setup.
-  2. Local Room database entities, DAOs, and DataStore preferences.
-  3. Jetpack Glance widget provider scaffolding.
-  4. Repository layer & Google Play In-App Billing abstraction.
-  5. TDD automated test strategy (Red-to-Green).
+- Icon Forge glyph export UI and Play Store store-listing asset packaging.
+- Wallpaper application now uses packaged master artwork with tested aspect-ratio-aware crop positioning; full device validation remains pending.
 
 ---
 

@@ -1,5 +1,46 @@
 # 300 — Screen Specification Inventory (Classical Stoic Luxury Redesign)
 
+## M3 Asset Catalog Screens & Canonical States
+
+All M3 surfaces inherit v2 tokens: obsidian canvas `#08080A`, basalt cards `#121216`, satin bronze `#C5A869`, oxblood `#8A1C14`, Roman serif display, clean sans utility copy, 18dp cards, and no glass/neon.
+
+### SCR-007: Wallpaper Vault
+
+* **Route**: `vault`.
+* **Purpose**: Browse the 12-item downloadable master catalog by bundle and entitlement.
+* **Layout/actions**: v2 dock and header, category rail, portrait cards with true-black badge, cache state, lock treatment; preview, filter, and Vanguard actions.
+
+### SCR-008: Wallpaper Preview & Apply
+
+* **Route**: `wallpaper/{wallpaperId}`.
+* **Purpose**: Inspect text-free masters with clock/dock readability overlays before download or apply to Home, Lock, or Both.
+* **Layout/actions**: edge-to-edge art and a black gradient control shelf; download/cache, apply, favourite, and context-preserving paywall actions. Controls are never baked into artwork.
+
+### SCR-009: Icon Forge & Export
+
+* **Route**: `icons`.
+* **Purpose**: Browse six 16-glyph bronze families and export a selected family for compatible launchers.
+* **Layout/actions**: basalt family selector, 4-column glyph grid, compatibility notice, and gold `Export icons` CTA. It must say “launcher-dependent export”, never universal installation.
+
+### SCR-010: Widget Forge Expansion
+
+* **Surface**: SCR-005 Widgets tab.
+* **Purpose**: Add Creed Ticker (4x1) and War Calendar (4x2) beside the approved two 2x2 widgets.
+* **Layout/actions**: same Studio cards; previews are native-looking components and dynamic values render in Glance. `Add to home` uses Android pinning and falls back to system-placement guidance.
+
+### Eight canonical asset-catalog states
+
+| State | Visible behavior | Required action |
+| --- | --- | --- |
+| Loading | Basalt skeleton cards preserve crop ratio. | None; no empty flash. |
+| Populated | Thumbnail, title, black percentage, entitlement, cache state. | Preview/filter/export. |
+| Locked | Oxblood scrim and bronze lock. | Open Vanguard pass. |
+| Offline cache hit | `AVAILABLE OFFLINE` bronze label. | Apply without network. |
+| Downloading | Per-card progress/cancel; thumbnail stays visible. | Cancel/retry. |
+| Download error | Concise non-destructive error below card. | Retry. |
+| Empty/filter no match | Creed and reset control. | Clear filters. |
+| Apply/export success | Short bronze confirmation sheet. | Dismiss or continue browsing. |
+
 > **Document Version**: 4.0.0 (Classical Stoic Luxury Baseline)  
 > **Status**: APPROVED  
 > **Stitch Project ID**: `14386677080154071069`  
@@ -114,4 +155,3 @@
   - Library Section: Offline cache, Restore purchases, and About 300 rows.
   - Stoic footer: *"Discipline in every detail. Zero bloatware."*
   - Docked 4-tab bar: `Discover`, `Studio`, `Vault`, `Settings` (active gear glowing gold).
-

@@ -24,7 +24,8 @@ Welcome to the **300** autonomous agent system and persistent engineering worksp
 │   ├── performance-agent.md           # Cold startup (<500ms), 60/120fps scrolling, low memory
 │   ├── security-agent.md              # Zero leaks, minimal permissions, safe storage
 │   ├── release-agent.md               # Play Store compliance, ProGuard/R8, signing, bundles
-│   └── reviewer-agent.md              # Independent quality gate & cross-domain auditor
+│   ├── reviewer-agent.md              # Independent quality gate & cross-domain auditor
+│   └── device-installer-agent.md      # ADB discovery (USB/Wi-Fi), wireless pairing, APK deploy & launch
 ├── workflows/                         # Explicit, multi-step repeatable protocols
 │   ├── bootstrap.md                   # Environment & tooling readiness
 │   ├── product-definition.md          # PRD drafting & scope definition
@@ -35,6 +36,7 @@ Welcome to the **300** autonomous agent system and persistent engineering worksp
 │   ├── tdd-feature.md                 # Red-Green-Refactor implementation protocol
 │   ├── implementation.md              # Production code writing rules
 │   ├── device-validation.md           # Multi-device & density test matrix
+│   ├── device-install.md              # Live hardware ADB discovery, wireless pairing & deploy
 │   ├── accessibility-review.md        # Comprehensive a11y audit
 │   ├── performance-review.md          # Frame drop, memory & battery profiling
 │   ├── release.md                     # Build, sign, and store deployment pipeline

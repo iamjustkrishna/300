@@ -1,0 +1,44 @@
+{
+  "version": 1,
+  "applicationMode": "export-only",
+  "provenance": "original-vector-design",
+  "master": "masters/300-icon-glyphs.svg",
+  "families": [
+    {"family":"core","glyphs":[
+      {"id":"core_phone"},{"id":"core_messages"},{"id":"core_mail"},{"id":"core_camera"},
+      {"id":"core_gallery"},{"id":"core_browser"},{"id":"core_maps"},{"id":"core_contacts"},
+      {"id":"core_clock"},{"id":"core_calendar"},{"id":"core_calculator"},{"id":"core_files"},
+      {"id":"core_settings"},{"id":"core_security"},{"id":"core_play"},{"id":"core_music"}
+    ]},
+    {"family":"focus","glyphs":[
+      {"id":"focus_fitness"},{"id":"focus_health"},{"id":"focus_timer"},{"id":"focus_notes"},
+      {"id":"focus_tasks"},{"id":"focus_journal"},{"id":"focus_wallet"},{"id":"focus_weather"},
+      {"id":"focus_travel"},{"id":"focus_home"},{"id":"focus_work"},{"id":"focus_study"},
+      {"id":"focus_book"},{"id":"focus_podcast"},{"id":"focus_photo"},{"id":"focus_voice"}
+    ]},
+    {"family":"system","glyphs":[
+      {"id":"system_wifi"},{"id":"system_bluetooth"},{"id":"system_battery"},{"id":"system_flashlight"},
+      {"id":"system_volume"},{"id":"system_brightness"},{"id":"system_airplane"},{"id":"system_location"},
+      {"id":"system_lock"},{"id":"system_unlock"},{"id":"system_shield"},{"id":"system_sync"},
+      {"id":"system_download"},{"id":"system_upload"},{"id":"system_share"},{"id":"system_search"}
+    ]},
+    {"family":"forge","glyphs":[
+      {"id":"forge_lambda"},{"id":"forge_helmet"},{"id":"forge_spear"},{"id":"forge_shield"},
+      {"id":"forge_laurel"},{"id":"forge_torch"},{"id":"forge_column"},{"id":"forge_crest"},
+      {"id":"forge_anvil"},{"id":"forge_hammer"},{"id":"forge_standard"},{"id":"forge_gate"},
+      {"id":"forge_compass"},{"id":"forge_orbit"},{"id":"forge_medallion"},{"id":"forge_vault"}
+    ]},
+    {"family":"social","glyphs":[
+      {"id":"social_people"},{"id":"social_profile"},{"id":"social_community"},{"id":"social_event"},
+      {"id":"social_chat"},{"id":"social_call"},{"id":"social_video"},{"id":"social_stream"},
+      {"id":"social_follow"},{"id":"social_heart"},{"id":"social_bookmark"},{"id":"social_comment"},
+      {"id":"social_send"},{"id":"social_link"},{"id":"social_qr"},{"id":"social_inbox"}
+    ]},
+    {"family":"commerce","glyphs":[
+      {"id":"commerce_store"},{"id":"commerce_cart"},{"id":"commerce_receipt"},{"id":"commerce_card"},
+      {"id":"commerce_bank"},{"id":"commerce_chart"},{"id":"commerce_coin"},{"id":"commerce_gift"},
+      {"id":"commerce_ticket"},{"id":"commerce_package"},{"id":"commerce_delivery"},{"id":"commerce_support"},
+      {"id":"commerce_star"},{"id":"commerce_crown"},{"id":"commerce_vanguard"},{"id":"commerce_restore"}
+    ]}
+  ]
+}

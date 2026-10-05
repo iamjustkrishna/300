@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">300</string>
+    <string name="monolith_clock_widget_name">Monolith Clock</string>
+    <string name="monolith_clock_widget_description">Austere obsidian chronometer with Roman numerals and stoic creed.</string>
+    <string name="shield_battery_widget_name">Shield Battery</string>
+    <string name="shield_battery_widget_description">Forged bronze hoplite shield with real-time battery power reserve.</string>
+    <string name="creed_ticker_widget_name">Creed Ticker</string>
+    <string name="creed_ticker_widget_description">A daily Spartan maxim, rendered natively on your home screen.</string>
+    <string name="war_calendar_widget_name">War Calendar</string>
+    <string name="war_calendar_widget_description">A seven-day tactical calendar with an austere Spartan finish.</string>
 </resources>

@@ -12,9 +12,14 @@
 | Tablet (Portrait) | 800 x 1280 dp (10") | 16:10 | xhdpi | Specified |
 | Tablet (Landscape) | 1280 x 800 dp (10") | 16:10 | xhdpi | Specified |
 
+## Live Connected Devices
+| Realme RMX3171 | Wi-Fi (Wireless Debugging) | `192.168.31.23:35759` | **Installed & Launched Live** | App installed & `MainActivity` launched successfully |
+| Android Emulator (Large/Tablet) | Local Transport | `emulator-5554` | **Installed & Launched Live** | Fresh `app-debug.apk` installed; Discover, Vault, and 1-Tap Apply Dialog tested live |
+
 ## System Configuration Checks
 - [ ] 3-Button Navigation mode
 - [ ] Gesture Navigation mode
 - [ ] 200% System Font Scaling
 - [ ] System Dark Mode default
 - [ ] Reduced Motion enabled
+

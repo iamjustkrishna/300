@@ -12,6 +12,8 @@
 - [ ] Phase 7-8 TDD implementation complete.
 - [ ] Unit & integration test suites 100% green.
 - [ ] Device matrix validated across phones, foldables, tablets.
-- [ ] ProGuard/R8 minification enabled and tested.
+- [x] ProGuard/R8 minification enabled and tested (`assembleRelease`).
+- [x] Release AAB generated (`app/build/outputs/bundle/release/app-release.aab`, ~10.3 MB).
 - [ ] Privacy Policy and Play Store Data Safety form ready.
 - [ ] App Store assets (Icon, Feature Graphic, Screenshots) verified.
+- [ ] Google Play Billing gateway configured for the Vanguard one-time product; current app boundary fails closed until product configuration is supplied.

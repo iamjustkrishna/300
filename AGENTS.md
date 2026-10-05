@@ -19,8 +19,8 @@ Welcome to the **300** autonomous agent system and persistent engineering worksp
 ## 2. Directory Structure
 
 - `.agents/README.md`: Workspace guide and system rules.
-- `.agents/agents/`: 13 specialized agent definitions.
-- `.agents/workflows/`: 15 step-by-step engineering protocols.
+- `.agents/agents/`: 14 specialized agent definitions (including `device-installer-agent`).
+- `.agents/workflows/`: 16 step-by-step engineering protocols (including `device-install`).
 - `.agents/states/`: Persistent project state (single source of truth).
 - `.agents/plans/`: 14-phase master execution plan, current sprint, backlog.
 - `.agents/specs/`: Complete product, screen, navigation, state, device, edge cases, design system, and testing specifications.
@@ -39,4 +39,7 @@ Welcome to the **300** autonomous agent system and persistent engineering worksp
 
 # Run Android Lint:
 .\gradlew lintDebug
+
+# Discover connected devices (USB / Wi-Fi) & install:
+powershell -ExecutionPolicy Bypass -File .\scripts\device_helper.ps1 -Action discover
 ```
