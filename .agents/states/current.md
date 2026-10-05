@@ -78,6 +78,7 @@
 - [x] Added a scrollable/searchable Icon Forge catalog screen for all 96 manifest entries and routed it from Studio.
 - [x] Added glyph detail modal with launcher-dependent export/import disclosure.
 - [x] Added explicit billing gateway and entitlement repository boundaries; unconfigured billing fails closed until Play Billing is wired.
+- [x] Created four original inspiration-led wallpaper drafts in `assets/wallpapers/drafts/inspiration-v2/` for visual direction review; these remain separate from the approved 1440x3200 WebP master catalog.
 - [x] Release minification verified and release AAB generated; signing currently uses the local Gradle release signing configuration.
 - [ ] Complete Play Store listing visual packaging and release pack distribution.
 
